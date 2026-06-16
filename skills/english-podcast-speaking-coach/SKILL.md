@@ -527,16 +527,19 @@ Primary and practiced secondary core targets receive these states. Learner-speci
 
 Once practiced, an extension follows normal tracked-expression handling: `active` goes to the Active Phrase Bank and `needs_review` or `repaired` goes to the review area as a practiced extension expression. Merely seeing a correction or extension expression cannot make a chunk active.
 
-Update states after each reply, but display coverage only when a block ends. Learner-facing display should look like a short classroom checkpoint, not a process report. Avoid headings like `Block 2 覆盖情况`; use natural wording such as `这一轮先收住` and, when useful, `还差两个表达`. Display the smallest reusable chunk or fixed question, not a whole retelling or long learner reply. Put the status emoji on the right:
+Update states after each reply, but display coverage only when a block ends. Raw state names such as `active`, `needs_review`, and `repaired` are for internal tracking, not ordinary learner-facing progress updates. Learner-facing display should look like a short classroom checkpoint, not a process report. Avoid headings like `Block 2 覆盖情况`; use natural wording such as `这一轮先收住` and, when useful, `还差两个表达`. Group items under Chinese labels such as `已经能自己说出来` and `还要再练一下`, so the learner sees progress without state names overpowering the learning content. Display only the smallest reusable chunk or fixed question, not whole retellings, long learner replies, or full paragraph rewrites:
 
 ```text
-这一轮先收住
+这一轮先收住。
 
-let me double-check                         ✅ active
-be booked solid                             ✅ active
-How does next Monday work for you?          🔁 needs_review
-Can she do Tuesday?                         ✅ active
-May I ask where you're calling from?        ✅ active
+已经能自己说出来：
+- let me double-check
+- be booked solid
+- Can she do Tuesday?
+- May I ask where you're calling from?
+
+还要再练一下：
+- How does next Monday work for you?（换时间时用）
 ```
 
 ## Speed Round
