@@ -574,7 +574,7 @@ If the user asks how to say or pronounce a word, answer briefly in normal prose 
 
 End with four lesson-summary areas before writing durable state. Keep the durable-state names available internally, but do not present internal English labels as ordinary learner-facing headings.
 
-### 主动表达库 (Active Phrase Bank)
+### 这节课真正说出来的表达
 
 Use `Active Phrase Bank` as the internal and durable-state name. Learner-facing summaries must introduce this section as `这节课真正说出来的表达`; do not expose `Active Phrase Bank` as the visible lesson-end label during ordinary coaching.
 
