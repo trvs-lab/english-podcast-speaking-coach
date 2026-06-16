@@ -575,7 +575,12 @@ If the user asks how to say or pronounce a word, answer briefly in normal prose 
 
 ## Lesson-End Expression Areas
 
-End with four lesson-summary areas before writing durable state. Keep the durable-state names available internally, but do not present internal English labels as ordinary learner-facing headings.
+End with four lesson-summary areas before writing durable state. Use the Chinese headings below for learner-facing summaries, and keep the internal durable-state mapping only in coach/writeback reasoning:
+
+- `这节课真正说出来的表达` -> `Active Phrase Bank` / phrase bank
+- `下次还要再练的表达` -> review queue for unmastered core targets, practiced extension expressions, and repair targets
+- `听过但还没练熟的表达` -> Extension Expressions / extension expressions
+- `这节课碰到的词` -> Lesson Vocabulary / lesson vocabulary
 
 ### 这节课真正说出来的表达
 
@@ -585,17 +590,17 @@ Include only expressions the learner actively produced or successfully repaired 
 
 `chunk`, Chinese meaning, use case, personal sentence or corrected personal sentence, Chinese recall prompt, and status `active`.
 
-### 待复习核心表达、已练拓展表达与修复目标 (Core Targets and Repair Targets to Review)
+### 下次还要再练的表达
 
-List core targets, practiced extension expressions, and learner-specific repair targets that are not active after Speed round. Keep `needs_review` or `repaired` and include Chinese meaning plus a Chinese recall prompt. Do not place them in the Active Phrase Bank.
+Use the review queue as the internal and durable-state destination. List core targets, practiced extension expressions, and learner-specific repair targets that are not active after Speed round. Keep `needs_review` or `repaired` and include Chinese meaning plus a Chinese recall prompt. Do not place them in the Active Phrase Bank.
 
-### 拓展表达 (Extension Expressions)
+### 听过但还没练熟的表达
 
-List useful non-core expressions the coach showed but the learner has not practiced. Do not assign mastery status and do not place them in durable review state.
+Use `Extension Expressions` as the internal and durable-state name. List useful non-core expressions the coach showed but the learner has not practiced. Do not assign mastery status and do not place them in durable review state or the Active Phrase Bank.
 
-### 本课词汇 (Lesson Vocabulary)
+### 这节课碰到的词
 
-List lesson vocabulary separately from expression mastery.
+Use `Lesson Vocabulary` as the internal and durable-state name. List lesson vocabulary separately from expression mastery.
 
 - `主动用过`: vocabulary the learner used in an answer.
 - `见过但未主动用`: vocabulary the coach explained but the learner did not use.
@@ -804,7 +809,7 @@ If `skill_version` is older than the current schema:
 - Using `English（中文）` for target chunks and accidentally revealing the answer.
 - Treating `active` target chunks as safe to show in prompts instead of requiring recall.
 - Mixing ordinary vocabulary into coverage progress or the Active Phrase Bank.
-- Forgetting to add lesson vocabulary to the separate `本课词汇` area.
+- Forgetting to add lesson vocabulary to the separate `这节课碰到的词` area.
 - Letting practiced extension expressions fall between the Active Phrase Bank and Extension Expressions.
 - Writing durable state without concrete evidence from learner production or near-transfer repair.
 - Letting active review or repair files grow beyond the startup reading budget.
