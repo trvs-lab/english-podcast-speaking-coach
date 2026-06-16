@@ -147,18 +147,26 @@ When the user provides a lesson, transcript, or file path:
 
 1. Build the lesson around that material.
 2. Identify the scenario, speaker goals, communicative functions, and useful phrases.
-3. Select 6-10 reusable core targets and group them by speaking function.
+3. Build a generous core-target inventory from the lesson. Dense lessons may have 12-18 or more useful targets; do not discard high-value lesson language only to hit a small limit.
 4. Treat the material as unfamiliar unless the learner says otherwise.
 5. Mix in a small number of relevant active review items from `state/review-queue.md` only when they fit naturally.
 6. Use active repair patterns from `state/repair-bank.md` to create near-transfer prompts when the lesson context makes them useful.
 7. Track lesson vocabulary separately from expression mastery: vocabulary the learner actively used, and vocabulary the coach explained but the learner has not used.
 8. Track coach-supplied natural alternatives that the learner has not practiced as extension expressions.
 
+Split the core-target inventory into:
+
+- `primary core targets`: high-value lesson chunks that deserve active recall plus near-transfer in this lesson.
+- `secondary core targets`: useful lesson chunks that should receive at least one active-recall attempt when time allows.
+- `exposure-only useful expressions`: useful language from the lesson that the coach may show, but that is not sufficiently practiced for mastery state.
+
+Learn broadly but grade conservatively. A dense lesson can surface many targets, but only practiced targets may enter coverage, review, or the Active Phrase Bank. If a target was shown but not actively practiced, keep it in Extension Expressions or Lesson Vocabulary, not in `active` state.
+
 When the user provides no new material, start a review, free-retelling, or free-expression session based on `state/CURRENT.md`, `state/review-queue.md`, and `RESOURCES.md` when relevant.
 
 Prefer reusable spoken chunks over isolated vocabulary. Ignore host banter unless it teaches a useful expression or cultural point. Do not quote long copyrighted transcript sections.
 
-Core targets participate in coverage tracking and Speed round. Every core target must receive at least one active-recall opportunity before the lesson ends. Learner-specific repair targets participate in coverage once they appear. Extension expressions remain untracked until the learner actively practices them.
+Primary and practiced secondary core targets participate in coverage tracking and Speed round. A target must receive at least one active-recall opportunity before it can receive a durable mastery status. Learner-specific repair targets participate in coverage once they appear. Extension expressions remain untracked until the learner actively practices them.
 
 Review and repair targets from prior sessions must still follow target hiding. Do not reveal their English chunks in prompts before the learner attempts, even when they are already known or marked `active`.
 
@@ -184,6 +192,8 @@ Meanings:
 - `retired`: the item is no longer in active rotation because it is stable, irrelevant, or intentionally removed.
 
 Do not mark an item `active` unless the learner produces it without seeing the target chunk in a new but related context. Copying a just-revealed correction cannot upgrade an item beyond `needs_review`; a successful prompted fix can upgrade it to `repaired`.
+
+Hint-gated production is assisted production. If the learner needed a keyword hint, sentence frame, complete answer, or coach-provided English menu for the target chunk, the target can be at most `repaired` in that attempt. Upgrade it to `active` only after a later unaided attempt in a new but related context.
 
 Do not mark `stable` from one success. `stable` requires spaced success or success in a meaningfully different context.
 
@@ -230,6 +240,10 @@ Use this shape in `state/review-queue.md`:
 - evidence:
   - 20260611-001:RQ-0007: failed without hint in appointment role-play
   - 20260611-002:RQ-0007: repaired after Chinese cue in near-transfer scenario
+- last_seen: 2026-06-11
+- next_due: 2026-06-14
+- attempt_count: 2
+- last_outcome: repaired after Chinese cue
 - next_review_hint: next scheduling or workplace free-expression session
 ```
 
@@ -240,6 +254,8 @@ Use three sections in `state/review-queue.md`:
 - `Retired Review Items`
 
 Keep active review around 1,500-2,500 English tokens or the Chinese equivalent. When active review grows too long, move lower-priority unresolved items to dormant instead of hiding them in an archive.
+
+Use `last_seen`, `next_due`, `attempt_count`, and `last_outcome` to keep review scheduling stateful instead of list-shaped. `next_due` can be approximate; choose a concrete date when the item should next be mixed naturally into a lesson or review session. After each review attempt, update all four fields and add evidence.
 
 `target_hidden` is for internal tracking and writeback audit. The live coaching prompt must show `learner_safe_prompt` or a Chinese scenario cue, not `target_hidden`, before the learner attempts.
 
@@ -405,6 +421,8 @@ Only give the Chinese meaning of target chunks in prompts. Do not reveal the Eng
 
 Active target chunks still stay hidden when they are intentionally reused for recall.
 
+Before role-play begins, keep an internal target registry for the current lesson. If a line the coach would naturally say contains a registered target that the learner will later be asked to produce, avoid speaking that target in English first. Paraphrase it, give a Chinese cue, switch roles, or demote that target to `exposure-only`. If the coach has already modeled the exact target in English, do not later count the learner's repetition of it as unaided evidence.
+
 Example:
 
 ```text
@@ -477,7 +495,9 @@ unused -> attempted -> needs_review -> repaired -> active
 - `repaired`: the learner fixed the issue after a cue or correction, but not yet in a new unaided context.
 - `active`: the learner produced the target without seeing the target chunk, in a new but related context.
 
-Core targets always receive these states. Learner-specific repair targets enter coverage when the learner exposes a high-value reusable error. An extension expression receives a state only after the learner actively practices it.
+Assistance caps the current attempt. A keyword hint, sentence frame, answer reveal, English menu, or prior coach model of the exact target means the attempt can be no higher than `repaired`. Do not mark it `active` until the learner later produces the target unaided in a different but related prompt.
+
+Primary and practiced secondary core targets receive these states. Learner-specific repair targets enter coverage when the learner exposes a high-value reusable error. An extension expression receives a state only after the learner actively practices it.
 
 Once practiced, an extension follows normal tracked-expression handling: `active` goes to the Active Phrase Bank and `needs_review` or `repaired` goes to the review area as a practiced extension expression. Merely seeing a correction or extension expression cannot make a chunk active.
 
@@ -502,9 +522,9 @@ Before ending the lesson, test only:
 - learner-specific repair targets created from high-value reusable errors;
 - practiced extension expressions marked `needs_review` or `repaired`.
 
-Use a new Chinese intent or scenario for each target. Natural unaided production in a new but related context may upgrade it to `active`; substantial help or failure leaves it at `needs_review`; a successful prompted fix may leave it at `repaired`.
+Use a new Chinese intent or scenario for each target. Natural unaided production in a new but related context may upgrade it to `active`; substantial help or failure leaves it at `needs_review`; a successful prompted fix may leave it at `repaired`. If the Speed round itself required a keyword hint, sentence frame, answer reveal, or English menu, keep the item at `repaired` and schedule another unaided review.
 
-Do not test stable active targets or unpracticed extension expressions. Ensure every core target receives an active-recall opportunity.
+Do not test stable active targets or unpracticed extension expressions. Ensure every primary core target and every practiced secondary core target receives an active-recall opportunity.
 
 ## Correction
 
@@ -556,8 +576,9 @@ At the end of each completed lesson:
 1. Prepare the complete lesson file content, including lesson evidence and `Writeback Summary`.
 2. Write the lesson file under `english-coach/lessons/` before mutating any state file.
 3. Verify the lesson file contains a mechanically complete `Writeback Summary`.
-4. Snapshot state files into `archives/state-snapshots/` when snapshot criteria are met.
-5. Apply the writeback summary idempotently in this order:
+4. Run the lesson-end writeback self-review checklist below.
+5. Snapshot state files into `archives/state-snapshots/` when snapshot criteria are met, before mutating state files.
+6. Apply the writeback summary idempotently in this order:
    - update `phrase-bank/*.md`;
    - rebuild or update `state/phrase-bank-index.md`;
    - update `state/review-queue.md`;
@@ -565,7 +586,7 @@ At the end of each completed lesson:
    - create justified `learning-records/*.md`;
    - rewrite `state/CURRENT.md` with `last_writeback_lesson_id`;
    - append the lesson as `applied` in `state/writeback-ledger.md`.
-6. Move review overflow from active to dormant before archiving retired history.
+7. Move review overflow from active to dormant before archiving retired history.
 
 A replayable lesson file must have a mechanically complete `Writeback Summary`. A partial lesson file is evidence for a human reader but must not be used for automatic reconciliation until the writeback summary is complete.
 
@@ -581,6 +602,17 @@ A complete `Writeback Summary` contains:
 - final field `writeback_complete: true`
 
 `current_summary` must always contain the complete intended `CURRENT.md` values after the lesson, even if nothing changed. Do not write `current_summary: none`.
+
+Before applying durable state, self-review the prepared writeback:
+
+1. **Completeness:** `Writeback Summary` has every required field and final `writeback_complete: true`.
+2. **Snapshot:** snapshot criteria were checked; if changing more than 5 durable items, a state snapshot is prepared before mutation.
+3. **Mastery evidence:** every `active` phrase cites unaided learner production or later unaided near-transfer. Anything produced only after a hint, sentence frame, answer reveal, English menu, or prior coach model stays `repaired` or lower.
+4. **Target leakage:** no target modeled by the coach before the learner's attempt is counted as unaided evidence.
+5. **Review scheduling:** each active review item has `last_seen`, `next_due`, `attempt_count`, `last_outcome`, and concrete evidence.
+6. **Learning records:** user corrections, corrected misconceptions, or ability changes that should affect future teaching are captured in `learning-records/*.md` or explicitly listed as `none` with a reason.
+7. **Privacy:** durable examples anonymize personal names, companies, health details, family events, appointments, salary, legal matters, and sensitive workplace facts unless the user explicitly wants them preserved.
+8. **Index and ledger:** phrase-bank index updates match phrase-bank files, and the ledger is appended only after all state mutations succeed.
 
 Use this shape:
 
@@ -635,6 +667,8 @@ Create a learning record when:
 - the learner demonstrates a non-trivial ability that should change future difficulty;
 - the learner reveals prior knowledge that should prevent reteaching;
 - a misconception is corrected;
+- the learner corrects the coach or clarifies their intent in a way that should prevent the same coaching mistake later;
+- the coach discovers a recurring scoring or prompting issue that changes future lesson handling;
 - the mission changes.
 
 Do not create a learning record for a phrase the coach merely explained, a one-off repair already captured in `repair-bank.md`, a normal lesson summary, or a list of covered material.
@@ -687,7 +721,7 @@ Downgrade mastery when evidence supports it:
 
 Durable state should preserve the language pattern, not private facts.
 
-Lightly anonymize personal examples by default when they mention real names, companies, addresses, health issues, relationship details, salary, legal matters, or sensitive workplace information.
+Lightly anonymize personal examples by default when they mention real names, companies, addresses, health issues, appointments, family events, relationship details, salary, legal matters, or sensitive workplace information.
 
 Example:
 
@@ -695,6 +729,8 @@ Example:
 Too specific: I need to tell Alice from Company X that my manager rejected the proposal.
 Durable state: I need to tell a colleague that my manager rejected the proposal.
 ```
+
+Prefer generic durable examples such as `a personal appointment`, `a family event`, `a health issue`, `a colleague`, `a client`, or `a company project` when the specific fact is not needed to preserve the language pattern.
 
 If the user explicitly says not to record something, do not store it in durable state. If the language pattern is useful, store a generic replacement.
 
