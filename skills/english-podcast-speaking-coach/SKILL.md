@@ -310,7 +310,7 @@ Keep active repair content around 1,000-1,500 English tokens or the Chinese equi
 
 ## Guided Preview
 
-Start with one short Chinese teacher-style paragraph, not field-style bullets. Naturally explain the real-life scenario, what the learner will do first and later, the approximate number of core targets, and: `练习时一时说不出来也没关系；如果卡住，直接回复「给我提示」。` Do not reveal target English.
+Start with one short Chinese teacher-style paragraph, not field-style bullets. Open as a real classroom setup, usually with wording like `我们先进入一个真实情境：` or `先进入一个真实情境。` Naturally explain the real-life scenario, what the learner will do first and later, the approximate number of core targets, and: `练习时一时说不出来也没关系；如果卡住，直接回复「给我提示」。` Do not reveal target English.
 
 Use this lesson sequence:
 
@@ -328,6 +328,7 @@ For user-visible expression:
 - Keep feedback short first. Expand only when there is a real transferable problem, repeated issue, or useful contrast to explain.
 - Chinese may be used naturally for setup, feedback, and follow-up, but keep the 目标英文 hidden until the learner has attempted, asks for help, or is stuck.
 - Show fewer status names to the learner. Maintain internal states normally, but make progress updates read like practice guidance instead of a state report.
+- Internal labels such as `Block`, `coverage`, `Speed Round`, and `Active Phrase Bank` should not be frequent learner-facing labels. Prefer natural classroom transitions such as `先进入一个真实情境`, `这一轮先收住`, `还差两个表达`, `最后补两句`, and `这节课真正说出来的表达`.
 
 ## Active-Recall Blocks
 
@@ -344,7 +345,7 @@ Each block selects 2-3 internal targets in `unused`, `attempted`, `needs_review`
 6. Use short feedback for natural answers and full problem-triggered correction for meaningful errors.
 7. Optionally practice one high-value chunk with substitution after it has appeared.
 8. When the learner made a reusable error, use a near-transfer scenario instead of asking them to copy the corrected sentence. The scenario may introduce new vocabulary, but it must explain new words and hide target chunks in English.
-9. Continue for 2-3 turns, then show one compact coverage update.
+9. Continue for 2-3 turns, then show one compact learner-facing progress note. Internally this is the coverage update, but the visible transition should sound like a class checkpoint, for example `这一轮先收住，看一下刚才真正说出来的表达。`
 
 Do not say "尽量用上" followed by the complete target sentence before the learner attempts. Do not show a keyword hint or sentence frame unless the learner needs help. Do not treat copying a just-revealed correction as `active`.
 
@@ -368,7 +369,7 @@ For a mostly natural answer, keep feedback light:
 
 [natural version]
 
-我继续：
+[natural transition into the next role-play line, varied by context]
 [next role-play line]
 ```
 
@@ -526,10 +527,10 @@ Primary and practiced secondary core targets receive these states. Learner-speci
 
 Once practiced, an extension follows normal tracked-expression handling: `active` goes to the Active Phrase Bank and `needs_review` or `repaired` goes to the review area as a practiced extension expression. Merely seeing a correction or extension expression cannot make a chunk active.
 
-Update states after each reply, but display coverage only when a block ends. Display the smallest reusable chunk or fixed question, not a whole retelling or long learner reply. Put the status emoji on the right:
+Update states after each reply, but display coverage only when a block ends. Learner-facing display should look like a short classroom checkpoint, not a process report. Avoid headings like `Block 2 覆盖情况`; use natural wording such as `这一轮先收住` and, when useful, `还差两个表达`. Display the smallest reusable chunk or fixed question, not a whole retelling or long learner reply. Put the status emoji on the right:
 
 ```text
-Block 2 覆盖情况
+这一轮先收住
 
 let me double-check                         ✅ active
 be booked solid                             ✅ active
@@ -539,6 +540,8 @@ May I ask where you're calling from?        ✅ active
 ```
 
 ## Speed Round
+
+Keep `Speed round` as the internal control name, but do not announce it as a learner-facing process label during ordinary practice. If only a few items remain, transition naturally with `还差两个表达` or `最后补两句`; if more remain, say briefly that the lesson will finish by checking the expressions that still need one more real attempt.
 
 Before ending the lesson, test only:
 
@@ -572,6 +575,8 @@ If the user asks how to say or pronounce a word, answer briefly in normal prose 
 End with four learner-facing areas before writing durable state.
 
 ### 主动表达库 (Active Phrase Bank)
+
+Use `Active Phrase Bank` internally. Learner-facing introductions may say `这节课真正说出来的表达` so the area feels like a lesson summary rather than a system state.
 
 Include only expressions the learner actively produced or successfully repaired through a near-transfer scenario and then produced unaided in a new but related context. Aim for 8-12 when enough qualify; never pad with unpracticed expressions. Each entry includes:
 
