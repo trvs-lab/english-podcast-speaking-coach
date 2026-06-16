@@ -586,7 +586,7 @@ End with four lesson-summary areas before writing durable state. Use the Chinese
 
 Use `Active Phrase Bank` as the internal and durable-state name. Learner-facing summaries must introduce this section as `这节课真正说出来的表达`; do not expose `Active Phrase Bank` as the visible lesson-end label during ordinary coaching.
 
-Include only expressions the learner actively produced or successfully repaired through a near-transfer scenario and then produced unaided in a new but related context. Aim for 8-12 when enough qualify; never pad with unpracticed expressions. Each entry includes:
+Include only expressions the learner actively produced or successfully repaired through a near-transfer scenario and then produced unaided in a new but related context. Aim for 8-12 when enough qualify; never pad with unpracticed expressions. For durable/writeback records, each entry includes:
 
 `chunk`, Chinese meaning, use case, personal sentence or corrected personal sentence, Chinese recall prompt, and status `active`.
 
