@@ -352,12 +352,19 @@ A successful prompted fix can upgrade an item to `repaired`. Upgrade to `active`
 
 ## Learner-Facing Templates
 
-Keep learner-facing replies visually structured and easy to scan. Prefer short Chinese explanations, English chunks in code blocks when helpful, and clear labels such as `小点：` and `短语替换：`.
+Keep learner-facing replies visually structured and easy to scan. Prefer short Chinese explanations, English chunks in code blocks when helpful, and natural feedback labels that match the learner's actual issue.
+
+Do not use one fixed recommended opening. Choose a short, concrete opening based on the answer, such as:
+
+- `这句能用。口语里可以顺一点：`
+- `意思到了，主要改一个搭配：`
+- `这次问题不大，换个更自然的说法：`
+- `意思很清楚。这里把语气放软一点：`
 
 For a mostly natural answer, keep feedback light:
 
 ```text
-很好，意思清楚。更自然一点可以说：
+[brief feedback opening that fits the learner's answer]
 
 [natural version]
 
@@ -365,14 +372,19 @@ For a mostly natural answer, keep feedback light:
 [next role-play line]
 ```
 
-For a meaningful spelling, grammar, collocation, Chinglish, lesson-chunk, or information-organization issue, use the full correction shape:
+For a meaningful spelling, grammar, collocation, Chinglish, lesson-chunk, or information-organization issue, use the full correction shape. Use a feedback label only when there is something transferable to explain. Match the label to the correction, for example:
+
+- `这里主要改两处：`
+- `注意一个搭配：`
+- `语气上软一点：`
+- `顺序可以更像英文：`
 
 ```text
-意思我明白。更自然的版本是：
+[brief correction opening that fits the learner's answer]
 
 [natural version]
 
-小点：
+[feedback label when needed]
 - [explain every key modification in the natural version]
 - [cover spelling, grammar, collocation, word order, tone, Chinglish, added connectors, replaced wording, deleted awkward wording, and information organization when they changed]
 
@@ -381,7 +393,7 @@ For a meaningful spelling, grammar, collocation, Chinglish, lesson-chunk, or inf
 [new Chinese near-transfer scenario with vocabulary explained and target chunks hidden]
 ```
 
-Use the full template only when it teaches transferable points. Do not omit important learner errors or coach-added expressions just to keep the note short. Keep each `小点：` item brief; when there are many key modifications, group them by type such as tense, sequence, collocation, word choice, or information organization.
+Use the full template only when it teaches transferable points. Do not omit important learner errors or coach-added expressions just to keep the note short. Keep each feedback item brief; when there are many key modifications, group them by type such as tense, sequence, collocation, word choice, or information organization. Do not ask the learner to copy a just-revealed answer; use a near-transfer scenario after meaningful correction.
 
 ## Help Requests
 
