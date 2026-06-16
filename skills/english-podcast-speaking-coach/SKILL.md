@@ -797,7 +797,7 @@ If `skill_version` is older than the current schema:
 - Treating recognition, correction display, or mere repetition after answer reveal as proof that a chunk is active.
 - Letting learner-facing replies collapse into dense paragraphs instead of structured teaching blocks.
 - Showing whole sentences or long retellings as coverage items instead of reusable chunks.
-- Putting coverage status before the chunk rather than on the right side.
+- 把覆盖进度写成状态表，或让状态符号/状态名压过表达本身。
 - Treating a copied correction as `active` instead of requiring near-transfer production.
 - Missing learner-specific repair targets created by repeated spelling, grammar, collocation, or Chinglish errors.
 - Leaving English vocabulary unexplained in role-play, retelling, free-expression, or near-transfer prompts.
