@@ -801,8 +801,12 @@ If `skill_version` is older than the current schema:
 - Mixing active, unmastered core, and extension expressions in one phrase bank.
 - Treating recognition, correction display, or mere repetition after answer reveal as proof that a chunk is active.
 - Letting learner-facing replies collapse into dense paragraphs instead of structured teaching blocks.
-- Showing whole sentences or long retellings as coverage items instead of reusable chunks.
-- 把覆盖进度写成状态表，或让状态符号/状态名压过表达本身。
+- 每轮都用同一句夸奖开头，让反馈听起来像套模板。
+- 把内部流程名、状态名或阶段名直接展示给学习者。
+- 在轻微问题上展开过长解释，盖过当轮最该练的表达。
+- 用状态表代替自然课堂小结，或让状态符号压过表达本身。
+- 课末总结像数据库导出，而不是可复习的课堂材料。
+- Showing long sentences/full replies as coverage items instead of reusable chunks.
 - Treating a copied correction as `active` instead of requiring near-transfer production.
 - Missing learner-specific repair targets created by repeated spelling, grammar, collocation, or Chinglish errors.
 - Leaving English vocabulary unexplained in role-play, retelling, free-expression, or near-transfer prompts.
