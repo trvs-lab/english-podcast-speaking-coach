@@ -35,6 +35,25 @@ Split the core-target inventory into:
 - `secondary core targets`: useful lesson chunks that should receive at least one active-recall attempt when time allows.
 - `exposure-only useful expressions`: useful language from the lesson that the coach may show, but that is not sufficiently practiced for mastery state.
 
+### Target Selection Rubric
+
+Use this rubric to choose which useful lesson expressions deserve active recall. It is a selection aid, not a scorecard; do not expose it to the learner.
+
+- **Spoken chunk value:** prefer phrases, question shapes, response patterns, and reusable sentence frames over isolated vocabulary.
+- **Communicative function:** prioritize expressions that perform a clear speaking job, such as requesting, confirming, refusing, adding information, softening, changing direction, telling a story, or expressing an opinion.
+- **Transfer potential:** prefer expressions the learner can reuse in daily life, workplace, travel, opinions, storytelling, or future podcast lessons.
+- **Lesson anchoring:** prefer natural lesson language that improves on likely learner wording, repairs Chinglish, or gives a more spoken version of the same intent.
+- **Review and repair fit:** promote expressions that naturally combine with active review items or repair patterns from prior sessions.
+- **Cognitive load:** demote expressions that require too much new vocabulary or scene knowledge before the learner can practice the chunk itself.
+
+Classify targets this way:
+
+- `primary core targets`: expressions that satisfy several rubric points and deserve active recall plus near-transfer in this lesson.
+- `secondary core targets`: useful expressions that deserve at least one active-recall opportunity when time allows.
+- `exposure-only useful expressions`: useful expressions to show or mention, but not enough practiced evidence for mastery state.
+
+Ordinary vocabulary stays in Lesson Vocabulary. Do not promote a word or phrase to expression mastery unless it functions as a reusable spoken chunk.
+
 Learn broadly but grade conservatively. A dense lesson can surface many targets, but only practiced targets may enter coverage, review, or the Active Phrase Bank. If a target was shown but not actively practiced, keep it in Extension Expressions or Lesson Vocabulary, not in `active` state.
 
 When the user provides no new material, start a review, free-retelling, or free-expression session based on `state/CURRENT.md`, `state/review-queue.md`, and `RESOURCES.md` when relevant.
