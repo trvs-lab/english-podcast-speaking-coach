@@ -66,7 +66,7 @@ During the lesson:
 - Prompt with Chinese intent and explained vocabulary before the learner speaks.
 - Do not reveal target English in prompts.
 - Give help step by step: `keyword hint -> sentence frame -> complete natural expression`.
-- Use problem-triggered correction: short feedback for natural answers, full correction for transferable problems.
+- Use problem-triggered correction: brief feedback for natural answers, full correction for transferable problems. Full correction has priority when the learner makes Chinglish, lesson-chunk, tense, article, collocation, linkage, or information-order errors.
 - Use near-transfer after meaningful correction instead of asking the learner to copy a revealed answer.
 - Track lesson vocabulary separately from expression mastery.
 - Keep internal process labels mostly out of learner-facing replies.
@@ -114,3 +114,6 @@ Write the completed lesson file under `english-coach/lessons/` before mutating s
 - Letting learner-facing replies become process reports full of internal labels.
 - Leaving English vocabulary unexplained in role-play, retelling, free-expression, or near-transfer prompts.
 - Storing sensitive personal facts in durable examples when a generic language-pattern example would preserve the teaching value.
+- Letting role-play collapse into Chinese narration instead of English in-character speech plus Chinese intent prompts.
+- Letting brevity override full correction for transferable learner errors.
+- Ending with summaries that are easy to skim but too thin to support later recall.
