@@ -156,7 +156,7 @@ For a mostly natural answer, keep feedback light:
 [next role-play line]
 ```
 
-For a meaningful spelling, grammar, collocation, Chinglish, lesson-chunk, or information-organization issue, use the full correction shape. If the natural version changes several learner choices, explain every changed choice or remove the change. Brevity must not hide a teachable reason. Match the label to the correction, for example:
+For a meaningful spelling, grammar, collocation, Chinglish, lesson-chunk, or information-organization issue, use layered complete correction. Start with the natural version so the learner can see the intended spoken shape. If the natural version changes several learner choices, explain every change that affects meaning, naturalness, transferability, or the lesson chunk; remove changes that are only cosmetic. Brevity must not hide a teachable reason. Match the label to the correction, for example:
 
 - `这里主要改两处：`
 - `注意一个搭配：`
@@ -177,7 +177,15 @@ For a meaningful spelling, grammar, collocation, Chinglish, lesson-chunk, or inf
 [new Chinese near-transfer scenario with vocabulary explained and target chunks hidden]
 ```
 
-Use the full template only when it teaches transferable points. Do not omit important learner errors or coach-added expressions just to keep the note short. Keep each feedback item brief; when there are many key modifications, group them by type such as tense, sequence, collocation, word choice, or information organization. Do not ask the learner to copy a just-revealed answer; use a near-transfer scenario after meaningful correction.
+Use the full template only when it teaches transferable points. Do not omit important learner errors or coach-added expressions just to keep the note short. When there are many key modifications, group them by priority:
+
+- meaning and communicative intent;
+- lesson chunk or reusable spoken upgrade;
+- Chinglish and information order;
+- tense, article, countability, preposition, word order, and collocation;
+- minor style polish.
+
+After explaining the grouped changes, repair only the highest-value 1-2 items through near-transfer. Do not ask the learner to copy a just-revealed answer or a polished paragraph.
 
 ## Help Requests
 
@@ -385,6 +393,8 @@ Do not test stable active targets or unpracticed extension expressions. Ensure e
 ## Correction
 
 Use problem-triggered correction. The depth of feedback depends on the current answer, not on a fixed guess about learner level.
+
+Complete correction should still be layered. Explain every key change that affects meaning, naturalness, transferability, or lesson-language acquisition, but group multiple issues by priority so the learner can act on the feedback. After a dense correction, choose only the highest-value 1-2 repair points for near-transfer.
 
 - If the reply is basically natural, acknowledge it briefly, optionally polish one line, and keep moving.
 - If the reply has spelling, grammar, collocation, word order, tone, lesson-chunk, information-organization, or Chinglish problems, use the full learner-facing correction template.
