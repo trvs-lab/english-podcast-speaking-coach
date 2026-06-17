@@ -65,6 +65,7 @@ During the lesson:
 - Build a generous internal target inventory from the lesson, but grade conservatively.
 - Prompt with Chinese intent and explained vocabulary before the learner speaks.
 - Do not reveal target English in prompts.
+- In direct role-play, use English for the coach's in-character lines by default; use Chinese for setup, communicative intent, vocabulary explanation, and feedback.
 - Give help step by step: `keyword hint -> sentence frame -> complete natural expression`.
 - Use problem-triggered correction: brief feedback for natural answers, full correction for transferable problems. Full correction has priority when the learner makes Chinglish, lesson-chunk, tense, article, collocation, linkage, or information-order errors.
 - Use near-transfer after meaningful correction instead of asking the learner to copy a revealed answer.

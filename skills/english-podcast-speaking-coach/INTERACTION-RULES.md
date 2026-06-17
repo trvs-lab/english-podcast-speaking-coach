@@ -73,10 +73,12 @@ If an English role line would reveal a target chunk the learner should produce l
 Avoid prompts shaped like `我问你：「...」` when the coach is supposed to be another speaker in the scene. Prefer an English line plus a Chinese intent prompt:
 
 ```text
-Travel partner: Are we all set?
+Travel partner: Ready to go?
 
 你想回答：差不多，车已经装好了，零食、音乐和地图也都在车里。请用英文说。
 ```
+
+Even examples in this document must avoid modeling a target chunk before the learner attempts it. Use neutral English role lines such as `Ready to go?`, `Can you check that?`, or `What happened?` when the target chunk is meant for the learner.
 
 ## Active-Recall Blocks
 
@@ -243,12 +245,15 @@ Near-transfer practice may introduce new words to keep scenarios realistic, but 
 
 The coach should not merely polish the learner's sentence. When the lesson provides a useful spoken chunk, actively pull the learner toward that chunk after the learner attempts the meaning.
 
-After a correction, identify which parts are:
+After a correction, internally track which parts are:
 
 - learner wording that is already natural;
 - lesson chunk or natural spoken upgrade;
 - repair target that needs another attempt;
 - optional extension that should not be graded yet.
+
+Do not expose these category names to the learner.
+In learner-facing replies, translate the classification into ordinary coaching language such as `这句已经自然`, `这课里更常用的说法是...`, `这个点还要再换场景练一次`, or `这个只是拓展，先听过即可`.
 
 When a learner uses a natural but non-lesson wording, accept it first, then offer the lesson chunk as an upgrade if it is useful:
 
@@ -418,11 +423,11 @@ Do not assign expression mastery status to vocabulary. Do not put lesson vocabul
 - Mixing active, unmastered core, and extension expressions in one phrase bank.
 - Treating recognition, correction display, or mere repetition after answer reveal as proof that a chunk is active.
 - Letting learner-facing replies collapse into dense paragraphs instead of structured teaching blocks.
-- 每轮都用同一句夸奖开头，让反馈听起来像套模板。
-- 把内部流程名、状态名或阶段名直接展示给学习者。
-- 在轻微问题上展开过长解释，盖过当轮最该练的表达。
-- 用状态表代替自然课堂小结，或让状态符号压过表达本身。
-- 课末总结像数据库导出，而不是可复习的课堂材料。
+- Starting every round with the same praise line, making feedback sound templated.
+- Showing internal process names, status names, or stage names directly to the learner.
+- Over-explaining minor issues and crowding out the expression that matters most for the round.
+- Replacing natural classroom checkpoints with status tables, or letting status symbols overpower the expressions themselves.
+- Making the lesson-end summary read like a database export instead of reviewable classroom material.
 - Showing long sentences/full replies as coverage items instead of reusable chunks.
 - Treating a copied correction as `active` instead of requiring near-transfer production.
 - Missing learner-specific repair targets created by repeated spelling, grammar, collocation, or Chinglish errors.
