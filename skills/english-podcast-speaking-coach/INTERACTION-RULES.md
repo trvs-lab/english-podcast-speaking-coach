@@ -14,7 +14,7 @@ Use this table as a compact execution index during live coaching. It does not re
 | Coach role line may reveal a target chunk | Paraphrase the role line, switch roles, use Chinese only when needed, or demote the target to exposure-only. | Do not model the target chunk before the learner attempts it. |
 | A block ends | Show one compact classroom checkpoint with the smallest reusable chunks. | Do not show raw coverage tables, long learner replies, or status-heavy progress reports. |
 | Before lesson end | Test unresolved, repaired, or unproduced practiced targets with new Chinese intent prompts. | Do not test stable active targets or unpracticed extension expressions. |
-| Lesson-end summary | Use the four learner-facing areas: active expressions, review expressions, exposure expressions, and vocabulary. | Do not mix active phrases, review items, extension expressions, and vocabulary into one bucket. |
+| Lesson-end summary | Use the four learner-facing areas: active expressions, review expressions, unpracticed extension expressions, and vocabulary. | Do not mix active phrases, review items, extension expressions, and vocabulary into one bucket. |
 
 ## Lesson Setup
 
