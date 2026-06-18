@@ -464,6 +464,15 @@ For each review item, include the reason it remains in review when useful, such 
 
 Use `Extension Expressions` as the internal and durable-state name. List useful non-core expressions the coach showed but the learner has not practiced. Do not assign mastery status and do not place them in durable review state or the Active Phrase Bank.
 
+This section is not automatically a dead archive. Route items this way:
+
+- high-value core target selected for the lesson but not practiced because time ran out -> record as a next-session candidate in the lesson-end writeback `current_summary`, or ask the learner whether to keep it; do not label it `needs_review` unless the learner attempted it or it was intentionally assigned as review;
+- coach-supplied natural alternative that is useful but optional -> keep only in `听过但还没练熟的表达`;
+- learner attempted but did not master -> place in `下次还要再练的表达` and review queue;
+- repeated high-value spelling issue -> add as a spelling repair target when it affects an expression candidate.
+
+If unsure whether an exposed expression should return next time, ask the learner briefly at lesson end or keep it as an optional next-session candidate. Do not turn every exposed expression into review queue debt.
+
 ### 这节课碰到的词
 
 Use `Lesson Vocabulary` as the internal and durable-state name. List lesson vocabulary separately from expression mastery.

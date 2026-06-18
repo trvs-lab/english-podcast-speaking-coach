@@ -36,6 +36,8 @@ A complete `Writeback Summary` contains:
 
 `current_summary` must always contain the complete intended `CURRENT.md` values after the lesson, even if nothing changed. Do not write `current_summary: none`.
 
+## Writeback Self-Review
+
 Before applying durable state, self-review the prepared writeback:
 
 1. **Completeness:** `Writeback Summary` has every required field and final `writeback_complete: true`.
@@ -46,6 +48,10 @@ Before applying durable state, self-review the prepared writeback:
 6. **Learning records:** user corrections, corrected misconceptions, or ability changes that should affect future teaching are captured in `learning-records/*.md` or explicitly listed as `none` with a reason.
 7. **Privacy:** durable examples anonymize personal names, companies, health details, family events, appointments, salary, legal matters, and sensitive workplace facts unless the user explicitly wants them preserved.
 8. **Index and ledger:** phrase-bank index updates match phrase-bank files, and the ledger is appended only after all state mutations succeed.
+9. **Active threshold:** every phrase-bank addition satisfies one active evidence path: target-hidden production in a new related context, repair plus later unaided production, or valid pattern-level evidence. Original-scene-only production is not enough.
+10. **Unmastered routing:** attempted-but-unmastered targets are in review queue updates; optional unpracticed expressions are explicitly left as extension-only or next-session candidates with a reason.
+11. **Spelling repairs:** repeated high-value spelling errors are either captured as repair/review items or explicitly treated as minor one-off polish.
+12. **Replayable payload:** new phrase, review, and repair updates include the fields needed to reconstruct the durable item without guessing from surrounding prose.
 
 Use this shape:
 
@@ -53,18 +59,51 @@ Use this shape:
 ## Writeback Summary
 
 - writeback_status: ready
-- lesson_id: 20260611-001-restaurant-ordering
+- lesson_id: 20260611-002-making-appointments
 - phrase_bank_updates:
-  - PB-0012 -> phrase-bank/workplace.md -> active
+  - id: PB-0012
+    action: add
+    destination: phrase-bank/workplace.md
+    chunk: I was wondering if...
+    meaning_zh: 我想知道是否...
+    use_case: polite scheduling request
+    source_lesson: lessons/20260611-002-making-appointments.md
+    personal_example: I was wondering if we could move the meeting.
+    recall_prompt_zh: 礼貌询问能不能改会议时间
+    status: active
+    evidence:
+      - 20260611-002:PB-0012: unaided near-transfer in scheduling scenario
 - review_queue_updates:
-  - RQ-0007 -> needs_review -> priority high
+  - id: RQ-0007
+    action: add
+    type: core_target
+    target_hidden: How does next Monday work for you?
+    learner_safe_prompt: 用英文问“下周一你方便吗？”
+    reason: needed sentence frame before producing it
+    status: needs_review
+    priority: high
+    source_lesson: lessons/20260611-002-making-appointments.md
+    last_seen: 2026-06-11
+    next_due: 2026-06-14
+    attempt_count: 1
+    last_outcome: sentence-frame-assisted production
+    next_review_hint: scheduling or appointment lesson
+    evidence:
+      - 20260611-002:RQ-0007: sentence-frame-assisted production
 - repair_bank_updates:
-  - RB-0004 -> needs_review
+  - id: RB-0004
+    action: add
+    pattern: repeated spelling of conversation
+    corrected_shape: conversation
+    status: needs_review
+    next_near_transfer: use conversation in a new meeting or networking sentence
+    evidence:
+      - 20260611-002:RB-0004: misspelled conversation as convasation
 - learning_records:
   - none
 - current_summary:
-  - last_writeback_lesson_id: 20260611-001-restaurant-ordering
-  - last_writeback_lesson_path: lessons/20260611-001-restaurant-ordering.md
+  - last_writeback_lesson_id: 20260611-002-making-appointments
+  - last_writeback_lesson_path: lessons/20260611-002-making-appointments.md
   - current_focus: polite scheduling and soft requests
   - next_session: mix one new dialogue lesson with 3 active review items
   - priority_review: RQ-0007, RB-0004

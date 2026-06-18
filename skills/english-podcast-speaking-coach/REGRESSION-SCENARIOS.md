@@ -245,3 +245,26 @@ Failure signs:
 
 - Coach tests `I'm terrible with faces` after the frame has already been shown across meaningful slots.
 - Coach treats every noun swap as a separate unmastered expression.
+
+## 13. Unmastered Expression Routing And Active Threshold
+
+Setup:
+
+- Coach shows `business card` as a better version of `contact card`, but the learner does not practice it again.
+- Coach shows `Don't worry about it`, but learner only copied or saw it once.
+- Learner produces one target unaided in the original scene but never in a second context.
+
+Expected coach behavior:
+
+- High-value unmastered core or attempted expressions enter `下次还要再练的表达` and review queue.
+- Optional coach alternatives can stay in `听过但还没练熟的表达` with no review state.
+- Unpracticed but useful next-session candidates are recorded without falsely marking learner failure.
+- Active phrase bank additions meet the quantified evidence threshold.
+- Writeback update buckets include replayable payloads.
+
+Failure signs:
+
+- `听过但还没练熟的表达` receives no routing decision.
+- One original-scene production is treated as active without later unaided evidence.
+- Coach-shown alternatives are all pushed into review regardless of importance.
+- Writeback updates are pointer-only and require guessing fields from prose.
