@@ -207,3 +207,21 @@ Failure signs:
 - Natural version adds `last month` silently.
 - Natural version introduces `ran into` without explanation.
 - Coach only says the sentence is more natural without identifying the changed learning points.
+
+## 11. Coach Voice And Feedback Openings
+
+Setup:
+
+- Three consecutive learner replies are mostly correct but each has a different teaching point: one missing time detail, one mixed question tag, one spelling issue.
+
+Expected coach behavior:
+
+- Each feedback opening names the actual job or repair point.
+- The coach does not repeat `意思很清楚`, `意思到了`, or `整体很好` across consecutive turns.
+- The answer still stays concise when the issue is minor.
+- Positive feedback is allowed when it is specific to the learner's actual sentence.
+
+Failure signs:
+
+- Feedback starts with the same generic praise pattern several times.
+- The opening sounds like a grading report instead of a coach responding inside the scene.
