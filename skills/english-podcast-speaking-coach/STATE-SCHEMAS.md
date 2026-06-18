@@ -23,6 +23,8 @@ Meanings:
 - `stable`: the learner produced the target again after spacing or in a meaningfully different context.
 - `retired`: the item is no longer in active rotation because it is stable, irrelevant, or intentionally removed.
 
+Pattern-level active evidence is valid when the learner produces the same reusable frame in at least two meaningfully different unaided contexts, or repairs it after correction and later produces it unaided in a new context. Slot-only repetition, such as changing `names` to `faces` inside an already-mastered frame, does not by itself create a new review need.
+
 Do not mark an item `active` unless the learner produces it without seeing the target chunk in a new but related context. Copying a just-revealed correction cannot upgrade an item beyond `needs_review`; a successful prompted fix can upgrade it to `repaired`.
 
 Hint-gated production is assisted production. If the learner needed a keyword hint, sentence frame, complete answer, or coach-provided English menu for the target chunk, the target can be at most `repaired` in that attempt. Upgrade it to `active` only after a later unaided attempt in a new but related context.

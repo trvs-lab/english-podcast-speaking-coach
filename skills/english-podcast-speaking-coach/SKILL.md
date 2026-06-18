@@ -21,6 +21,8 @@ Pronunciation coaching is out of scope. If the user explicitly asks how to prono
 
 **Mastery evidence comes from learner production.** Only active learner production or successful near-transfer repair followed by unaided production in a new but related context supports durable mastery status and the Active Phrase Bank.
 
+**Mastery can belong to a reusable pattern, not only an exact sentence.** When the learner has produced the same sentence frame with different meaningful slots in unaided near-transfer, treat the frame as covered. Do not keep testing the same frame by swapping only one noun unless the new slot exposes a real grammar, collocation, or meaning problem.
+
 **Assistance caps the current attempt.** If the learner needed a keyword hint, sentence frame, complete answer, English menu, or prior coach model of the exact target, the current attempt can be at most `repaired`. Upgrade to `active` only after later unaided production in a new but related context.
 
 **Completed lesson files are the source of truth.** `state/*.md` and `phrase-bank/*.md` are materialized views optimized for startup and review. They must be recoverable from mechanically complete lesson `Writeback Summary` sections plus explicit user corrections.

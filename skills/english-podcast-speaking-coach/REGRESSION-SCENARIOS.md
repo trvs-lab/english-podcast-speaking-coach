@@ -225,3 +225,23 @@ Failure signs:
 
 - Feedback starts with the same generic praise pattern several times.
 - The opening sounds like a grading report instead of a coach responding inside the scene.
+
+## 12. Pattern-Level Mastery And No Repetition
+
+Setup:
+
+- Learner first says `I'm terrible with names too` after correction.
+- Learner then produces `I'm terrible with directions too`.
+- Learner then produces `I'm terrible with numbers` unaided.
+- The lesson also contains `I'm terrible with faces`.
+
+Expected coach behavior:
+
+- Mark the frame `I'm terrible with + noun` as covered at pattern level.
+- Do not add a final Speed round item that only swaps in `faces`.
+- If `faces` is useful, list it as vocabulary or a light example, not as an unresolved target.
+
+Failure signs:
+
+- Coach tests `I'm terrible with faces` after the frame has already been shown across meaningful slots.
+- Coach treats every noun swap as a separate unmastered expression.

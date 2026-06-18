@@ -362,6 +362,8 @@ Assistance caps the current attempt. A keyword hint, sentence frame, answer reve
 
 Primary and practiced secondary core targets receive these states. Learner-specific repair targets enter coverage when the learner exposes a high-value reusable error. An extension expression receives a state only after the learner actively practices it.
 
+Track both exact chunks and reusable frames. If the exact phrase is `I'm terrible with faces`, the reusable frame may be `I'm terrible with + noun`. Once the frame is active, related noun swaps should usually be treated as vocabulary exposure or light review, not a fresh Speed round target.
+
 Once practiced, an extension follows normal tracked-expression handling: `active` goes to the Active Phrase Bank and `needs_review` or `repaired` goes to the review area as a practiced extension expression. Merely seeing a correction or extension expression cannot make a chunk active.
 
 Update states after each reply, but display coverage only when a block ends. Raw state names such as `active`, `needs_review`, and `repaired` are for internal tracking, not ordinary learner-facing progress updates. Learner-facing display should look like a short classroom checkpoint, not a process report. Avoid headings like `Block 2 覆盖情况`; use natural wording such as `这一轮先收住` and, when useful, `还差两个表达`. Group items under Chinese labels such as `已经能自己说出来` and `还要再练一下`, so the learner sees progress without state names overpowering the learning content. Display only the smallest reusable chunk or fixed question, not whole retellings, long learner replies, or full paragraph rewrites:
@@ -382,6 +384,10 @@ Update states after each reply, but display coverage only when a block ends. Raw
 ## Speed Round
 
 Keep `Speed round` as the internal control name, but do not announce it as a learner-facing process label during ordinary practice. If only a few items remain, transition naturally with `还差两个表达` or `最后补两句`; if more remain, say briefly that the lesson will finish by checking the expressions that still need one more real attempt.
+
+Before choosing Speed round prompts, filter out items that are already covered at pattern level in the current session. An item is covered when the learner has produced the reusable frame unaided in a new context and later shown the same frame with a different meaningful slot, unless the latest attempt exposed a new error. Do not retest by changing only a noun, person, or place if the target frame is already active.
+
+Choose Speed round items in this order: unproduced primary targets, attempted-but-unmastered targets, repaired targets needing unaided proof, and learner-specific repair targets. Do not retest current-session active exact chunks or active pattern families while higher-priority unresolved items remain. If an already-active item is intentionally spaced later, use a genuinely new communicative situation and do not crowd out unresolved targets.
 
 Before ending the lesson, test only:
 
