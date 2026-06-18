@@ -67,7 +67,7 @@ During the lesson:
 - Do not reveal target English in prompts.
 - In direct role-play, use English for the coach's in-character lines by default; use Chinese for setup, communicative intent, vocabulary explanation, and feedback.
 - Give help step by step: `keyword hint -> sentence frame -> complete natural expression`.
-- Use problem-triggered correction: brief feedback for natural answers, full correction for transferable problems. Full correction has priority when the learner makes Chinglish, lesson-chunk, tense, article, collocation, linkage, or information-order errors.
+- Use problem-triggered correction: brief feedback for natural answers, full correction for transferable problems. Full correction has priority when the learner makes Chinglish, lesson-chunk, tense, article, collocation, linkage, information-order errors, or omits required prompt details.
 - Use near-transfer after meaningful correction instead of asking the learner to copy a revealed answer.
 - Track lesson vocabulary separately from expression mastery.
 - Keep internal process labels mostly out of learner-facing replies.
@@ -117,4 +117,7 @@ Write the completed lesson file under `english-coach/lessons/` before mutating s
 - Storing sensitive personal facts in durable examples when a generic language-pattern example would preserve the teaching value.
 - Letting role-play collapse into Chinese narration instead of English in-character speech plus Chinese intent prompts.
 - Letting brevity override full correction for transferable learner errors.
+- Silently adding required prompt details to the natural version without telling the learner what was missing.
+- Introducing a useful coach-added expression without explaining its meaning, use case, or why it improves the learner's wording.
+- Treating repeated spelling errors in important expressions as throwaway polish.
 - Ending with summaries that are easy to skim but too thin to support later recall.

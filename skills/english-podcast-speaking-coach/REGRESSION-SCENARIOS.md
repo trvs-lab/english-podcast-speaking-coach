@@ -186,3 +186,24 @@ Failure signs:
 - `current_summary` is missing or set to `none`.
 - Evidence says only `practiced in lesson` without concrete learner behavior.
 - The same evidence line is duplicated after replay.
+
+## 10. Retelling Correction Completeness
+
+Setup:
+
+- Prompt asks the learner to say they unexpectedly met Mark at a coffee shop; they had met at a workshop last month, but his name had slipped the learner's mind.
+- Learner says: `I met Mark near the coffee shop, we had met at a workshop, but his name had just slipped my mind.`
+- Coach natural version uses `I ran into Mark at a coffee shop. We had met at a workshop last month...`
+
+Expected coach behavior:
+
+- Explain `ran into` as a natural spoken chunk for unexpectedly meeting someone.
+- Point out that `last month` was omitted from the learner answer.
+- Correct `near` versus `at` and the comma splice if present.
+- Repair only the highest-value 1-2 issues through near-transfer.
+
+Failure signs:
+
+- Natural version adds `last month` silently.
+- Natural version introduces `ran into` without explanation.
+- Coach only says the sentence is more natural without identifying the changed learning points.

@@ -394,7 +394,15 @@ Do not test stable active targets or unpracticed extension expressions. Ensure e
 
 Use problem-triggered correction. The depth of feedback depends on the current answer, not on a fixed guess about learner level.
 
-Complete correction should still be layered. Explain every key change that affects meaning, naturalness, transferability, or lesson-language acquisition, but group multiple issues by priority so the learner can act on the feedback. After a dense correction, choose only the highest-value 1-2 repair points for near-transfer.
+Complete correction should still be layered. Before sending a natural version, compare it with the learner's answer and the prompt. Use this correction diff checklist to explain every meaningful change, then group multiple issues by priority so the learner can act on the feedback:
+
+- required prompt detail omitted or changed: time, place, person, object, quantity, cause, contrast, or relationship;
+- lesson chunk or spoken upgrade introduced by the coach;
+- Chinglish replacement or information-order repair;
+- tense, article, countability, preposition, word order, collocation, linkage, or punctuation that affects understanding or transfer;
+- spelling repair when repeated or attached to a practiced expression or phrase-bank candidate.
+
+If the natural version adds a useful expression such as `ran into`, explain why that expression is being introduced. If the natural version restores a prompt detail such as `last month`, explicitly say the learner left that detail out. After a dense correction, choose only the highest-value 1-2 repair points for near-transfer.
 
 - If the reply is basically natural, acknowledge it briefly, optionally polish one line, and keep moving.
 - If the reply has spelling, grammar, collocation, word order, tone, lesson-chunk, information-organization, or Chinglish problems, use the full learner-facing correction template.
@@ -406,6 +414,8 @@ Complete correction should still be layered. Explain every key change that affec
 - Correct repeated errors explicitly and add high-value repeated errors to coverage as learner-specific repair targets.
 - Explain in Chinese for Chinese-context practice.
 - Do not correct undefined information such as gender, identity, or background; preserve the name or use neutral wording.
+
+Spelling is not the main goal of speaking practice, but repeated or expression-blocking spelling errors deserve a separate, brief note. Do not bury them inside grammar feedback. If the same useful word is misspelled more than once in a lesson, or the misspelling blocks a practiced expression or phrase-bank candidate, create a learner-specific spelling repair target. Keep the spoken practice moving: explain the spelling once, then return to the expression task.
 
 If the user asks how to say or pronounce a word, answer briefly in normal prose and do not add that answer to coverage, review, phrase bank, repair bank, lesson-end areas, or writeback evidence.
 
@@ -487,3 +497,6 @@ Do not assign expression mastery status to vocabulary. Do not put lesson vocabul
 - Polishing a retelling paragraph but explaining only 2-3 of the changes while silently changing other learner choices.
 - Accepting a natural answer without offering a high-value lesson chunk that the learner was supposed to acquire.
 - Ending with a thin expression list that lacks meaning, use case, learner example, or recall prompt for important active expressions.
+- Silently adding required prompt details to the natural version without telling the learner what was missing.
+- Introducing a useful coach-added phrase such as `ran into` without explaining its meaning, use case, or why it improves the learner's wording.
+- Treating repeated high-value spelling errors as throwaway polish instead of a brief spelling repair target.
