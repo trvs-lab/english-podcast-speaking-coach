@@ -63,6 +63,23 @@ Before applying durable state, self-review the prepared writeback:
 11. **Spelling repairs:** repeated high-value spelling errors are either captured as repair/review items or explicitly treated as minor one-off polish.
 12. **Replayable payload:** new phrase, review, and repair updates include the fields needed to reconstruct the durable item without guessing from surrounding prose.
 
+Use these writeback actions:
+
+- `add`: create a new durable item;
+- `update`: update fields or evidence on an existing durable item;
+- `promote`: move an item upward after sufficient unaided evidence;
+- `retain`: keep an item in its current status after practice did not meet the next threshold;
+- `demote`: move an item downward after later failure or renewed assistance;
+- `retire`: remove an item from active rotation while preserving evidence.
+
+Replay payload requirements:
+
+- Every practiced old target must appear in a normal `phrase_bank_updates`, `review_queue_updates`, or `repair_bank_updates` entry. Do not use prose-only outcomes as the durable update.
+- For `promote`, `retain`, `demote`, and `retire`, include `source_id`, `source_file`, `destination`, `previous_status`, `status`, `practice_outcome`, concrete `evidence`, and any scheduling fields affected by the action. `destination` names the destination file or section for that update entry.
+- If a transition touches `phrase-bank/*.md`, include `phrase_bank_index_impact: add | update | remove | unchanged`.
+- Include the full durable item fields needed to reconstruct the resulting item without guessing from surrounding lesson prose.
+- Include schema-required scan-friendly fields such as `learning_point` for review items and `learner_safe_prompt` for repair items whenever they apply.
+
 Use this shape:
 
 ```md
@@ -89,6 +106,7 @@ Use this shape:
     type: core_target
     target_hidden: How does next Monday work for you?
     learner_safe_prompt: 用英文问“下周一你方便吗？”
+    learning_point: asking whether a proposed time works
     reason: needed sentence frame before producing it
     status: needs_review
     priority: high
@@ -100,11 +118,32 @@ Use this shape:
     next_review_hint: scheduling or appointment lesson
     evidence:
       - 20260611-002:RQ-0007: sentence-frame-assisted production
+  - id: RQ-0006
+    action: promote
+    practice_outcome: practiced_promoted
+    source_id: RQ-0006
+    source_file: state/review-queue.md
+    destination: state/review-queue.md#Retired Review Items
+    previous_status: repaired
+    status: retired
+    promoted_phrase_id: PB-0012
+    promoted_phrase_destination: phrase-bank/workplace.md
+    phrase_bank_index_impact: add
+    target_hidden: I was wondering if...
+    learner_safe_prompt: 用更委婉的方式预约一个时间
+    learning_point: soft scheduling request without sounding abrupt
+    last_seen: 2026-06-11
+    next_due: none
+    attempt_count: 3
+    last_outcome: unaided near-transfer, promoted to phrase bank
+    evidence:
+      - 20260611-003:RQ-0006: unaided near-transfer in a new scheduling role-play
 - repair_bank_updates:
   - id: RB-0004
     action: add
     pattern: repeated spelling of conversation
     corrected_shape: conversation
+    learner_safe_prompt: 在新句子里正确拼写 conversation
     status: needs_review
     next_near_transfer: use conversation in a new meeting or networking sentence
     evidence:

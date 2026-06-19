@@ -6,6 +6,8 @@ Read this file when creating, updating, deduplicating, reconciling, grading, or 
 
 Use predictable Markdown fields for durable items so writebacks can be merged, replayed, and audited.
 
+Keep durable files scan-friendly for humans. Put the expression, pattern, learner-safe prompt, or corrected shape near the top of each item. Keep IDs, statuses, source fields, and evidence because replay depends on them, but do not make the item read like a database row before it explains the learning point.
+
 ### Mastery Lifecycle
 
 Use this lifecycle for tracked expressions and repair targets:
@@ -41,6 +43,16 @@ Do not mark `stable` from one success. `stable` requires spaced success or succe
 
 Every durable status upgrade must cite concrete evidence from the current lesson. If evidence is ambiguous, keep the lower status and leave the item in review. User correction overrides model inference.
 
+### Promotion And Demotion
+
+When a review-queue expression reaches `active`, add or update the corresponding phrase-bank item, then move the review item out of `Active Review Items`. Keep the review item only as dormant or retired history unless it still needs scheduled review.
+
+When a repair-bank pattern becomes reliable, update the repair pattern to `active` or `stable` with evidence. If it no longer needs near-term attention, move it to dormant or retired instead of keeping it in active repair.
+
+When a previously active or stable phrase fails in a later lesson, do not write `needs_review` or `repaired` into `phrase-bank/*.md`; phrase-bank statuses remain `active`, `stable`, or `retired`. Keep the phrase-bank evidence history, add `review_reference: RQ-*` when useful, and add a new review-queue item or reactivate the existing one as the current unmastered record. Downgrade using the rules in `RECOVERY-RULES.md` and cite the new failure evidence.
+
+Promotion, retention, demotion, and retirement must be written as explicit writeback actions. Do not rely on prose in the lesson summary to imply a state move.
+
 ### ID Allocation
 
 Use stable ids within each namespace:
@@ -71,11 +83,12 @@ Use this shape in `state/review-queue.md`:
 ```md
 ### RQ-0007
 
-- type: phrase | repair | core_target | extension
-- target_hidden: "I was wondering if..."
 - learner_safe_prompt: "用更委婉的方式预约一个时间"
+- learning_point: "soft scheduling request without sounding abrupt"
+- target_hidden: "I was wondering if..."
 - status: needs_review | repaired | active | stable | retired
 - priority: high | medium | low
+- type: phrase | repair | core_target | extension
 - source_lesson: lessons/20260611-002-making-appointments.md
 - source_phrase_id: PB-0012
 - source_phrase_file: phrase-bank/workplace.md
@@ -137,6 +150,7 @@ Use this shape in `state/repair-bank.md`:
 
 - pattern: uses direct commands where a softer request is expected
 - corrected_shape: "I was wondering if..." / "Would it be possible to..."
+- learner_safe_prompt: "换一个场景，用更委婉的方式提出请求"
 - status: needs_review | repaired | active | stable | retired
 - evidence:
   - 20260611-001:RB-0004: "Move it to Friday" in scheduling role-play

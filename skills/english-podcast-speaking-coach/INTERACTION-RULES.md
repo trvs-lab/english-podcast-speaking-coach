@@ -442,6 +442,8 @@ End with four lesson-summary areas before writing durable state. Use the Chinese
 - `听过但还没练熟的表达` -> Extension Expressions / extension expressions
 - `这节课碰到的词` -> Lesson Vocabulary / lesson vocabulary
 
+For old review or repair targets practiced in this session, decide the durable transition before writeback: promote, retain, demote, or retire. Learner-facing summaries can stay simple, but the writeback must preserve the explicit transition and evidence.
+
 ### 这节课真正说出来的表达
 
 Use `Active Phrase Bank` as the internal and durable-state name. Learner-facing summaries must introduce this section as `这节课真正说出来的表达`; do not expose `Active Phrase Bank` as the visible lesson-end label during ordinary coaching.
