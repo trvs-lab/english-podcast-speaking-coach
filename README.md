@@ -26,15 +26,10 @@ English Podcast Speaking Coach 是一个 Codex skill，用于把 ESLPod、Englis
 
 ```text
 请帮我安装 English Podcast Speaking Coach skill（https://github.com/trvs-lab/english-podcast-speaking-coach）。请安装到当前目录，不要全局安装。
+可参考的安装命令：npx skills add https://github.com/trvs-lab/english-podcast-speaking-coach --skill english-podcast-speaking-coach
 ```
 
 如果 Codex 请求确认运行安装命令，确认即可。**安装完成后，记得重启 Codex，让本地 skill 被加载。**
-
-以下命令供 Codex 安装时参考，不需要手动运行：
-
-```bash
-npx skills add https://github.com/trvs-lab/english-podcast-speaking-coach --skill english-podcast-speaking-coach
-```
 
 ## 每次学习（每节课都这样做）
 
