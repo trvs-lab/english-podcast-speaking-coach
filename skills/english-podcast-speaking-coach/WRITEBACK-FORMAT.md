@@ -16,7 +16,7 @@ At the end of each completed lesson:
    - update `state/review-queue.md`;
    - update `state/repair-bank.md`;
    - create justified `learning-records/*.md`;
-   - move review overflow from active to dormant when needed;
+   - apply any explicit review overflow moves recorded in `review_queue_updates`;
    - rewrite `state/CURRENT.md` with `last_writeback_lesson_id`;
    - append the lesson as `applied` in `state/writeback-ledger.md`.
 
@@ -35,14 +35,16 @@ A complete `Writeback Summary` contains:
 - `current_summary`
 - final field `writeback_complete: true`
 
+If lesson-end writeback moves review overflow from active to dormant, each move must be represented as an explicit `review_queue_updates` entry with stable ids, `source_file`, `previous_section`, `destination`, `previous_status`, `status`, and the post-writeback scheduling fields. Do not make ad hoc overflow moves outside the replayable payload.
+
 `current_summary` must always contain the complete intended `CURRENT.md` values after the lesson, even if nothing changed. Do not write `current_summary: none`.
 
 When a session practices old review or repair targets, the `Writeback Summary` must record the outcome for each practiced target:
 
-- Record practiced outcomes inside the normal `phrase_bank_updates`, `review_queue_updates`, or `repair_bank_updates` bucket. The canonical replay action remains `promote`, `retain`, `demote`, `retire`, or `update`.
+- Record practiced outcomes inside the normal `phrase_bank_updates`, `review_queue_updates`, or `repair_bank_updates` bucket. The canonical replay action for practiced old targets remains `promote`, `retain`, `demote`, or `retire`; use `update` only for non-transition metadata, scheduling, or explicit review-overflow movement.
 - Add `practice_outcome: practiced_promoted` when the learner produced the old target unaided in a new related context and durable status changed upward.
 - Add `practice_outcome: practiced_retained` when the learner practiced the target but evidence was not enough to promote.
-- Add `practice_outcome: practiced_downgraded` when the learner forgot or failed an item that had previously been active or stable.
+- Add `practice_outcome: practiced_downgraded` when the learner forgot, failed, or copied an item that previously had stronger evidence, including `active`, `stable`, or `repaired`.
 - Include `previous_status`, `status`, concrete evidence, and scheduling fields for every practiced target update.
 - Use `not_practiced_still_due` only as an optional `current_summary` note for high-priority items that remain due because no suitable context appeared across 3 completed lessons.
 
@@ -75,7 +77,8 @@ Use these writeback actions:
 Replay payload requirements:
 
 - Every practiced old target must appear in a normal `phrase_bank_updates`, `review_queue_updates`, or `repair_bank_updates` entry. Do not use prose-only outcomes as the durable update.
-- For `promote`, `retain`, `demote`, and `retire`, include `source_id`, `source_file`, `destination`, `previous_status`, `status`, `practice_outcome`, concrete `evidence`, and any scheduling fields affected by the action. `destination` names the destination file or section for that update entry.
+- For `promote`, `retain`, `demote`, `retire`, and replayable `update` actions, include `source_id`, `source_file`, `destination`, `previous_status`, `status`, concrete `evidence`, and any scheduling fields affected by the action. Include `practice_outcome` when the update comes from practiced old review or repair. `destination` names the destination file or section for that update entry.
+- Scheduling fields such as `attempt_count`, `last_seen`, `next_due`, and `last_outcome` are absolute post-writeback values, not increments to apply repeatedly during replay.
 - If a transition touches `phrase-bank/*.md`, include `phrase_bank_index_impact: add | update | remove | unchanged`.
 - Include the full durable item fields needed to reconstruct the resulting item without guessing from surrounding lesson prose.
 - Include schema-required scan-friendly fields such as `learning_point` for review items and `learner_safe_prompt` for repair items whenever they apply.
@@ -137,7 +140,7 @@ Use this shape:
     attempt_count: 3
     last_outcome: unaided near-transfer, promoted to phrase bank
     evidence:
-      - 20260611-003:RQ-0006: unaided near-transfer in a new scheduling role-play
+      - 20260611-002:RQ-0006: unaided near-transfer in a new scheduling role-play
 - repair_bank_updates:
   - id: RB-0004
     action: add
@@ -154,7 +157,7 @@ Use this shape:
   - last_writeback_lesson_id: 20260611-002-making-appointments
   - last_writeback_lesson_path: lessons/20260611-002-making-appointments.md
   - current_focus: polite scheduling and soft requests
-  - next_session: mix one new dialogue lesson with 3 active review items
+  - next_session: check up to 3 priority review or repair candidates; practice 0-2 only if they naturally fit
   - priority_review: RQ-0007, RB-0004
   - temporary_constraints: hide target chunks during recall prompts
 - writeback_complete: true
@@ -170,7 +173,7 @@ Write `state/CURRENT.md` with this shape:
 - last_writeback_lesson_id: 20260611-002-making-appointments
 - last_writeback_lesson_path: lessons/20260611-002-making-appointments.md
 - current_focus: polite scheduling and soft requests
-- next_session: mix one new dialogue lesson with 3 active review items
+- next_session: check up to 3 priority review or repair candidates; practice 0-2 only if they naturally fit
 - priority_review:
   - RQ-0007
   - RB-0004

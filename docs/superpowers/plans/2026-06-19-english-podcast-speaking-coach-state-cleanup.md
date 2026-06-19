@@ -358,7 +358,7 @@ In `RECOVERY-RULES.md`, after the new snapshot criteria block, insert:
 Use one directory per snapshot:
 
 ```text
-archives/state-snapshots/YYYYMMDD-HHMMSS-<reason>/
+archives/state-snapshots/<reason-prefix>-YYYYMMDD-HHMMSS/
   CURRENT.md
   review-queue.md
   repair-bank.md
@@ -548,7 +548,7 @@ In `WRITEBACK-FORMAT.md`, after the `current_summary` completeness paragraph, in
 ```markdown
 When a session practices old review or repair targets, the `Writeback Summary` must record the outcome for each practiced target:
 
-- Record practiced outcomes inside the normal `phrase_bank_updates`, `review_queue_updates`, or `repair_bank_updates` bucket. The canonical replay action remains `promote`, `retain`, `demote`, `retire`, or `update`.
+- Record practiced outcomes inside the normal `phrase_bank_updates`, `review_queue_updates`, or `repair_bank_updates` bucket. The canonical replay action for practiced old targets remains `promote`, `retain`, `demote`, or `retire`; use `update` only for non-transition metadata, scheduling, or explicit review-overflow movement.
 - Add `practice_outcome: practiced_promoted` when the learner produced the old target unaided in a new related context and durable status changed upward.
 - Add `practice_outcome: practiced_retained` when the learner practiced the target but evidence was not enough to promote.
 - Add `practice_outcome: practiced_downgraded` when the learner forgot or failed an item that had previously been active or stable.
@@ -730,7 +730,7 @@ Then update the example `Writeback Summary` so `review_queue_updates` include `l
     phrase_bank_index_impact: add
     learning_point: soft scheduling request without sounding abrupt
     evidence:
-      - 20260611-003:RQ-0007: unaided near-transfer in a new scheduling role-play
+      - 20260611-002:RQ-0007: unaided near-transfer in a new scheduling role-play
 ```
 
 Expected: transition writebacks are replayable and examples contain the new human-readable fields.

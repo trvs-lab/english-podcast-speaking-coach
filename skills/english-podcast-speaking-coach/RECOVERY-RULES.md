@@ -4,7 +4,7 @@ Read this file when replaying writebacks, resolving conflicts, handling malforme
 
 ## Replay And Recovery
 
-On startup, use `state/writeback-ledger.md` to detect completed lesson files whose writeback has not been applied. If the ledger is missing, stale, or suspect, inspect completed lesson files in filename order and replay any missing mechanically complete `Writeback Summary` sections.
+On startup, use `state/writeback-ledger.md` and `state/CURRENT.md` to detect completed lesson files whose writeback has not been applied. If they agree, still compare their latest lesson id with the newest lesson filenames; a completed lesson file can exist after a crash even when both pointers are consistently old. If the ledger is missing, stale, suspect, mismatched with `CURRENT.md`, or older than a mechanically complete lesson file, inspect completed lesson files newer than the agreed pointer in filename order and replay any missing mechanically complete `Writeback Summary` sections.
 
 Replaying a writeback must be idempotent:
 
@@ -27,7 +27,7 @@ Do not create state snapshots for ordinary lesson-end writeback, even when a les
 Use one directory per snapshot:
 
 ```text
-archives/state-snapshots/YYYYMMDD-HHMMSS-<reason>/
+archives/state-snapshots/<reason-prefix>-YYYYMMDD-HHMMSS/
   CURRENT.md
   review-queue.md
   repair-bank.md
@@ -41,6 +41,7 @@ Do not mix flat snapshot filenames with directory snapshots. If only one file ne
 Snapshot retention:
 
 - Name snapshot directories with a reason prefix: `routine-`, `migration-`, `repair-`, or `manual-reorg-`.
+- `routine-` snapshots are ordinary replay/reconciliation or manual-reorg safety snapshots not tied to schema migration or user-requested repair.
 - After a successful recovery or mutation, prune routine snapshots beyond the most recent 5.
 - Keep migration snapshots until the migrated workspace has completed at least 3 later lessons without state-format issues; after that, they are eligible for pruning.
 - Keep snapshots explicitly tied to user-requested repair until the user confirms the repaired state is correct.
@@ -69,6 +70,8 @@ Downgrade mastery when evidence supports it:
 - `active` -> `repaired`: the learner fails first but repairs successfully after a cue.
 - `repaired` -> `needs_review`: the learner fails again or copies a revealed answer.
 - any status -> `retired`: the user says the item is no longer relevant, the item is intentionally removed, or a stable item has remained stable after spaced review and no longer needs rotation.
+
+For `PB-*` phrase-bank items, do not write `needs_review` or `repaired` into `phrase-bank/*.md`. If active or stable phrase-bank evidence is contradicted, preserve the phrase-bank item with an allowed status (`active`, `stable`, or `retired`), add `review_reference: RQ-*` when useful, and create or reactivate the `RQ-*` item that carries the current `needs_review` or `repaired` state.
 
 ## Privacy And Anonymization
 

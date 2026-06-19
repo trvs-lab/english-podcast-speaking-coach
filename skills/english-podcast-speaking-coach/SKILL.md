@@ -54,7 +54,7 @@ Before starting a lesson, review, free retelling, or free-expression session:
 5. Read the startup set defined in `WORKSPACE-FORMAT.md`.
 6. Check existing state for review or repair targets that naturally fit this session. Mix a small number into the lesson only when they fit the lesson context; if none fit, continue the new lesson normally and keep the items in review for a future suitable context.
 
-Before selecting review targets, run a compact writeback integrity check: compare `state/CURRENT.md` `last_writeback_lesson_id` with the latest `applied` entry in `state/writeback-ledger.md`. If the ledger is missing, stale, suspect, or mismatched with `CURRENT.md`, read `RECOVERY-RULES.md` and replay missing mechanically complete lesson writebacks before continuing. For large histories, scan `lessons/` only when this compact check is suspect.
+Before selecting review targets, run a compact writeback integrity check: compare `state/CURRENT.md` `last_writeback_lesson_id` with the latest `applied` entry in `state/writeback-ledger.md`, then check whether `lessons/` contains any lesson id newer than both pointers. If the ledger is missing, stale, suspect, mismatched with `CURRENT.md`, or older than a mechanically complete lesson file, read `RECOVERY-RULES.md` and replay missing mechanically complete lesson writebacks before continuing. For large histories, list lesson filenames and inspect only lessons newer than the agreed current/ledger id unless the ledger itself is suspect.
 
 Never ask the user to choose a workspace path during normal startup. If the user explicitly provides a project or course directory, create or reuse `english-coach/` inside that directory.
 

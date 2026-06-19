@@ -308,6 +308,7 @@ Failure signs:
 
 - Review item remains active and unresolved after clear promotion evidence.
 - Later failure is ignored because the phrase already exists in phrase bank.
+- Phrase-bank item is downgraded in place to `needs_review` or `repaired` instead of preserving phrase-bank status and creating or reactivating review.
 - State changes are implied only in prose and not represented as writeback actions.
 
 ## 16. Snapshot Noise Control
@@ -353,12 +354,13 @@ Failure signs:
 Setup:
 
 - A completed lesson file has `writeback_status: ready` and `writeback_complete: true`.
+- In one failure mode, the lesson file exists before any state pointers move, so `CURRENT.md` and `state/writeback-ledger.md` are consistently old.
 - `phrase-bank/*.md` and `state/phrase-bank-index.md` were updated.
 - `state/review-queue.md`, `state/CURRENT.md`, or `state/writeback-ledger.md` was not updated because the previous session stopped mid-writeback.
 
 Expected coach behavior:
 
-- On next startup, coach compares `CURRENT.last_writeback_lesson_id` with `state/writeback-ledger.md` before selecting review targets.
+- On next startup, coach compares `CURRENT.last_writeback_lesson_id` with `state/writeback-ledger.md` and checks whether any lesson filename is newer than both pointers before selecting review targets.
 - If the ledger is missing, stale, or mismatched, coach reads `RECOVERY-RULES.md` and replays the mechanically complete writeback idempotently.
 - Duplicate evidence is not added, already-applied phrase-bank updates are treated as no-ops, and the missing review/current/ledger updates are completed.
 
