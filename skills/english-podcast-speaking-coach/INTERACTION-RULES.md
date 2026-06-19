@@ -24,10 +24,12 @@ When the user provides a lesson, transcript, or file path:
 2. Identify the scenario, speaker goals, communicative functions, and useful phrases.
 3. Build a generous core-target inventory from the lesson. Dense lessons may have 12-18 or more useful targets; do not discard high-value lesson language only to hit a small limit.
 4. Treat the material as unfamiliar unless the learner says otherwise.
-5. Mix in a small number of relevant active review items from `state/review-queue.md` only when they fit naturally.
-6. Use active repair patterns from `state/repair-bank.md` to create near-transfer prompts when the lesson context makes them useful.
-7. Track lesson vocabulary separately from expression mastery: vocabulary the learner actively used, and vocabulary the coach explained but the learner has not used.
-8. Track coach-supplied natural alternatives that the learner has not practiced as extension expressions.
+5. Review `state/CURRENT.md`, `state/review-queue.md`, and `state/repair-bank.md` for up to 3 candidate review or repair targets that may fit the lesson.
+6. Practice 0-2 old targets only when they naturally fit the current role-play, retelling, free expression, or Speed round. Keep target hiding intact.
+7. Do not force unrelated review warm-ups into every new lesson. If no old target fits, continue the new lesson normally.
+8. If a high-priority item remains due across 3 completed lessons without a natural fit, keep it visible in `current_summary` or suggest a dedicated review session.
+9. Track lesson vocabulary separately from expression mastery: vocabulary the learner actively used, and vocabulary the coach explained but the learner has not used.
+10. Track coach-supplied natural alternatives that the learner has not practiced as extension expressions.
 
 Split the core-target inventory into:
 
@@ -63,6 +65,8 @@ Prefer reusable spoken chunks over isolated vocabulary. Ignore host banter unles
 Primary and practiced secondary core targets participate in coverage tracking and Speed round. A target must receive at least one active-recall opportunity before it can receive a durable mastery status. Learner-specific repair targets participate in coverage once they appear. Extension expressions remain untracked until the learner actively practices them.
 
 Review and repair targets from prior sessions must still follow target hiding. Do not reveal their English chunks in prompts before the learner attempts, even when they are already known or marked `active`.
+
+Context-fit review is still active recall. Prompt with Chinese meaning, situation, and explained scene vocabulary only. Do not show `target_hidden` before the learner attempts. If the learner saw the exact target in the prompt, the attempt cannot count as unaided evidence.
 
 ## Guided Preview
 

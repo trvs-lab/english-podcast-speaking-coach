@@ -52,7 +52,7 @@ Before starting a lesson, review, free retelling, or free-expression session:
 3. Create the workspace only if no existing workspace is found and the user is starting a coaching session.
 4. Restore the default mission if `MISSION.md` is missing, empty, or clearly damaged.
 5. Read the startup set defined in `WORKSPACE-FORMAT.md`.
-6. Use existing state to mix a small number of natural review or repair targets into the session when they fit the lesson context.
+6. Check existing state for review or repair targets that naturally fit this session. Mix a small number into the lesson only when they fit the lesson context; if none fit, continue the new lesson normally and keep the items in review for a future suitable context.
 
 Before selecting review targets, run a compact writeback integrity check: compare `state/CURRENT.md` `last_writeback_lesson_id` with the latest `applied` entry in `state/writeback-ledger.md`. If the ledger is missing, stale, suspect, or mismatched with `CURRENT.md`, read `RECOVERY-RULES.md` and replay missing mechanically complete lesson writebacks before continuing. For large histories, scan `lessons/` only when this compact check is suspect.
 

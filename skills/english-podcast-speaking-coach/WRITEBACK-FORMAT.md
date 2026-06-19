@@ -37,6 +37,15 @@ A complete `Writeback Summary` contains:
 
 `current_summary` must always contain the complete intended `CURRENT.md` values after the lesson, even if nothing changed. Do not write `current_summary: none`.
 
+When a session practices old review or repair targets, the `Writeback Summary` must record the outcome for each practiced target:
+
+- Record practiced outcomes inside the normal `phrase_bank_updates`, `review_queue_updates`, or `repair_bank_updates` bucket. The canonical replay action remains `promote`, `retain`, `demote`, `retire`, or `update`.
+- Add `practice_outcome: practiced_promoted` when the learner produced the old target unaided in a new related context and durable status changed upward.
+- Add `practice_outcome: practiced_retained` when the learner practiced the target but evidence was not enough to promote.
+- Add `practice_outcome: practiced_downgraded` when the learner forgot or failed an item that had previously been active or stable.
+- Include `previous_status`, `status`, concrete evidence, and scheduling fields for every practiced target update.
+- Use `not_practiced_still_due` only as an optional `current_summary` note for high-priority items that remain due because no suitable context appeared across 3 completed lessons.
+
 ## Writeback Self-Review
 
 Before applying durable state, self-review the prepared writeback:
