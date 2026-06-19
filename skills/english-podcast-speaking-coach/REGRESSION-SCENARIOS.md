@@ -268,3 +268,102 @@ Failure signs:
 - One original-scene production is treated as active without later unaided evidence.
 - Coach-shown alternatives are all pushed into review regardless of importance.
 - Writeback updates are pointer-only and require guessing fields from prose.
+
+## 14. Context-Fit Old Review Handling
+
+Setup:
+
+- `state/CURRENT.md` lists `RQ-0015`, `RQ-0016`, and `RB-0002` as priority review.
+- The user starts a new unrelated lesson about small talk.
+
+Expected coach behavior:
+
+- Coach checks old review and repair targets for context fit before or during lesson setup.
+- If a target naturally fits the lesson, it is mixed into role-play, retelling, free expression, or Speed round.
+- If no old target fits, coach continues the new lesson normally and keeps the items in review for a future suitable context.
+- Any old target that is practiced still hides target English before the learner attempts.
+
+Failure signs:
+
+- Coach never checks existing review or repair state during lesson setup.
+- Coach forces an unrelated warm-up that disrupts the new lesson.
+- Coach reveals `target_hidden` in a review prompt.
+- Coach practices an old item but fails to update its durable outcome.
+
+## 15. Promotion And Demotion Across Durable Files
+
+Setup:
+
+- `RQ-0015` asks the learner to say a computer might have a virus.
+- Learner produces the target unaided in a new app-troubleshooting scenario.
+- Two lessons later, learner says `it might be virus` again.
+
+Expected coach behavior:
+
+- First success promotes or updates the review item with concrete evidence and adds or updates the phrase-bank item when active-threshold evidence is met.
+- Later failure reactivates or adds a review item and cites the new failure evidence.
+- The phrase-bank history is not deleted; the review-queue status and scheduling reflect the renewed weakness.
+
+Failure signs:
+
+- Review item remains active and unresolved after clear promotion evidence.
+- Later failure is ignored because the phrase already exists in phrase bank.
+- State changes are implied only in prose and not represented as writeback actions.
+
+## 16. Snapshot Noise Control
+
+Setup:
+
+- A normal lesson adds 10 phrase-bank entries and 2 review items.
+- The lesson file has a complete `Writeback Summary`.
+
+Expected coach behavior:
+
+- Coach writes the lesson file first and applies the writeback.
+- Coach does not create `archives/state-snapshots/` entries for ordinary lesson writeback.
+- Coach relies on the replayable lesson file for recovery.
+
+Failure signs:
+
+- Ordinary lesson completion creates several snapshot files.
+- Snapshot filenames are flat files mixed directly under `state-snapshots/`.
+- Coach treats snapshots as the primary recovery mechanism instead of lesson replay.
+
+## 17. No Extra Human Dashboard
+
+Setup:
+
+- Workspace already has `phrase-bank/`, `state/review-queue.md`, `state/repair-bank.md`, `state/CURRENT.md`, and `GLOSSARY.md`.
+- User wants local files to have clearer purpose but does not want a dashboard.
+
+Expected coach behavior:
+
+- Coach does not create `DASHBOARD.md`, `MASTERED-EXPRESSIONS.md`, `ERROR-PATTERNS.md`, or `REVIEW.md`.
+- Existing core files become clearer through item ordering and concise learning-point fields.
+- `GLOSSARY.md` remains available as a reference file.
+
+Failure signs:
+
+- Coach creates a new human-facing summary file during normal lesson writeback.
+- Existing state files lose IDs or evidence in the name of readability.
+- `GLOSSARY.md` is removed from the workspace structure.
+
+## 18. Interrupted Writeback Replay
+
+Setup:
+
+- A completed lesson file has `writeback_status: ready` and `writeback_complete: true`.
+- `phrase-bank/*.md` and `state/phrase-bank-index.md` were updated.
+- `state/review-queue.md`, `state/CURRENT.md`, or `state/writeback-ledger.md` was not updated because the previous session stopped mid-writeback.
+
+Expected coach behavior:
+
+- On next startup, coach compares `CURRENT.last_writeback_lesson_id` with `state/writeback-ledger.md` before selecting review targets.
+- If the ledger is missing, stale, or mismatched, coach reads `RECOVERY-RULES.md` and replays the mechanically complete writeback idempotently.
+- Duplicate evidence is not added, already-applied phrase-bank updates are treated as no-ops, and the missing review/current/ledger updates are completed.
+
+Failure signs:
+
+- Coach trusts materialized state without checking the ledger.
+- Coach scans all historical lesson files on every normal startup even when ledger and `CURRENT.md` agree.
+- Replay creates duplicate phrase-bank items or duplicate evidence lines.
