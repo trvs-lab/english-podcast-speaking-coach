@@ -10,16 +10,17 @@ At the end of each completed lesson:
 2. Write the lesson file under `english-coach/lessons/` before mutating any state file.
 3. Verify the lesson file contains a mechanically complete `Writeback Summary`.
 4. Run the lesson-end writeback self-review checklist below.
-5. Snapshot state files into `archives/state-snapshots/` when snapshot criteria are met, before mutating state files.
-6. Apply the writeback summary idempotently in this order:
+5. Apply the writeback summary idempotently in this order:
    - update `phrase-bank/*.md`;
    - rebuild or update `state/phrase-bank-index.md`;
    - update `state/review-queue.md`;
    - update `state/repair-bank.md`;
    - create justified `learning-records/*.md`;
+   - move review overflow from active to dormant when needed;
    - rewrite `state/CURRENT.md` with `last_writeback_lesson_id`;
    - append the lesson as `applied` in `state/writeback-ledger.md`.
-7. Move review overflow from active to dormant before archiving retired history.
+
+The ledger must remain the final mutation; no review, repair, phrase-bank, index, or archive movement should happen after the ledger append.
 
 A replayable lesson file must have a mechanically complete `Writeback Summary`. A partial lesson file is evidence for a human reader but must not be used for automatic reconciliation until the writeback summary is complete.
 
@@ -41,7 +42,7 @@ A complete `Writeback Summary` contains:
 Before applying durable state, self-review the prepared writeback:
 
 1. **Completeness:** `Writeback Summary` has every required field and final `writeback_complete: true`.
-2. **Snapshot:** snapshot criteria were checked; if changing more than 5 durable items, a state snapshot is prepared before mutation.
+2. **Snapshot scope:** ordinary lesson writeback does not create snapshots. A snapshot is prepared only for replay/reconciliation, migration, malformed state repair, or large manual reorganization as defined in `RECOVERY-RULES.md`.
 3. **Mastery evidence:** every `active` phrase cites unaided learner production or later unaided near-transfer. Anything produced only after a hint, sentence frame, answer reveal, English menu, or prior coach model stays `repaired` or lower.
 4. **Target leakage:** no target modeled by the coach before the learner's attempt is counted as unaided evidence.
 5. **Review scheduling:** each active review item has `last_seen`, `next_due`, `attempt_count`, `last_outcome`, and concrete evidence.

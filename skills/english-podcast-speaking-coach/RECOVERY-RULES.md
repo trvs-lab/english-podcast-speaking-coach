@@ -17,10 +17,34 @@ The ledger key is `lesson_id`, not filename alone. The path is a locator that ma
 
 Snapshot criteria:
 
-- before replaying reconciliation;
-- before changing more than 5 durable items in one lesson;
-- before moving more than 5 review items between active, dormant, and retired;
-- at least every 5 completed lessons if state has changed.
+- before replaying or reconciling multiple completed lesson writebacks;
+- before migrating a workspace to a newer `skill_version`;
+- before repairing or replacing a malformed state, phrase-bank, ledger, or index file;
+- before moving 20 or more review, repair, or phrase-bank items between active, dormant, stable, and retired sections in one maintenance pass.
+
+Do not create state snapshots for ordinary lesson-end writeback, even when a lesson adds many phrase-bank items. Completed lesson files with mechanically complete `Writeback Summary` sections are the primary recovery mechanism.
+
+Use one directory per snapshot:
+
+```text
+archives/state-snapshots/YYYYMMDD-HHMMSS-<reason>/
+  CURRENT.md
+  review-queue.md
+  repair-bank.md
+  phrase-bank-index.md
+  writeback-ledger.md
+  phrase-bank-topic-files-that-will-change.md
+```
+
+Do not mix flat snapshot filenames with directory snapshots. If only one file needs protection, still create a snapshot directory containing that file.
+
+Snapshot retention:
+
+- Name snapshot directories with a reason prefix: `routine-`, `migration-`, `repair-`, or `manual-reorg-`.
+- After a successful recovery or mutation, prune routine snapshots beyond the most recent 5.
+- Keep migration snapshots until the migrated workspace has completed at least 3 later lessons without state-format issues; after that, they are eligible for pruning.
+- Keep snapshots explicitly tied to user-requested repair until the user confirms the repaired state is correct.
+- Never delete lesson files as part of snapshot retention.
 
 ## Conflict Handling
 
@@ -32,7 +56,7 @@ Use evidence quality rather than file order:
 - Prefer successful near-transfer over exact repetition.
 - Prefer explicit user correction over model inference.
 - If a state file is missing, recreate the minimal template and continue.
-- If a state file is malformed, preserve the original in `archives/` and create a clean replacement.
+- If a state file is malformed, preserve the original inside a timestamped `archives/state-snapshots/repair-.../` directory and create a clean replacement.
 - If the active review queue exceeds the startup budget, keep recent, repeated, and mission-relevant items active; move other unresolved items to dormant.
 - If the user corrects stored state, trust the user and update the relevant file.
 - If old lesson evidence conflicts with `CURRENT.md`, reconcile using evidence quality rules and rewrite `CURRENT.md`.
@@ -76,5 +100,5 @@ If `skill_version` is older than the current schema:
 3. Migrate only files needed for the current session.
 4. Preserve unknown fields unless they conflict with required schema.
 5. Prefer additive changes over destructive rewrites.
-6. Record migration notes in `archives/state-snapshots/` when migration affects teaching behavior or state interpretation.
+6. Record migration notes inside the timestamped `archives/state-snapshots/migration-.../` directory when migration affects teaching behavior or state interpretation.
 7. Update `WORKSPACE.md` only after the needed migration succeeds.

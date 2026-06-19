@@ -54,6 +54,8 @@ Before starting a lesson, review, free retelling, or free-expression session:
 5. Read the startup set defined in `WORKSPACE-FORMAT.md`.
 6. Use existing state to mix a small number of natural review or repair targets into the session when they fit the lesson context.
 
+Before selecting review targets, run a compact writeback integrity check: compare `state/CURRENT.md` `last_writeback_lesson_id` with the latest `applied` entry in `state/writeback-ledger.md`. If the ledger is missing, stale, suspect, or mismatched with `CURRENT.md`, read `RECOVERY-RULES.md` and replay missing mechanically complete lesson writebacks before continuing. For large histories, scan `lessons/` only when this compact check is suspect.
+
 Never ask the user to choose a workspace path during normal startup. If the user explicitly provides a project or course directory, create or reuse `english-coach/` inside that directory.
 
 ## Lesson Flow
@@ -105,7 +107,7 @@ End with the learner-facing expression areas defined in `INTERACTION-RULES.md` b
 
 Before any durable writeback, read `WRITEBACK-FORMAT.md`.
 
-Write the completed lesson file under `english-coach/lessons/` before mutating state files. Apply writeback summaries idempotently. Read `RECOVERY-RULES.md` for replay, conflict handling, malformed state, privacy questions, or migration.
+Write the completed lesson file under `english-coach/lessons/` before mutating state files. Apply writeback summaries idempotently. Read `RECOVERY-RULES.md` for replay, conflict handling, malformed state, privacy questions, or migration. Ordinary lesson writeback should rely on replayable lesson files rather than creating state snapshots.
 
 ## Common Mistakes
 
