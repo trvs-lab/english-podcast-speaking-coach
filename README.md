@@ -1,12 +1,14 @@
 # English Podcast Speaking Coach
 
-English Podcast Speaking Coach 是一个 Codex skill，用于把 ESLPod、EnglishPod、播客转写稿和对话课材料转成主动口语练习。它会围绕真实语境组织角色扮演、主动回忆、近迁移修复、复述和自由表达，并把学习状态写入可查看的 Markdown 工作区。
+English Podcast Speaking Coach 是一个面向 AI agent 的本地 skill，可用于 Codex、Claude Code、Cursor 等工具。它用于把 ESLPod、EnglishPod、播客转写稿和对话课材料转成主动口语练习，会围绕真实语境组织角色扮演、主动回忆、近迁移修复、复述和自由表达，并把学习状态写入可查看的 Markdown 工作区。
 
 这个 skill 适合已经有英文听力材料或课程文本、希望把「听懂」推进到「能说出来」的学习流程。它不提供发音训练，重点是表达召回、句块复用、自然改写和跨课复习。
 
 ## 使用方式
 
 建议为英语口语练习创建一个独立目录，并把 skill 安装到这个目录中。这样课程文本、学习状态和本地 skill 配置会放在同一个学习空间内，后续继续练习时更容易恢复上下文。
+
+本文以 Codex 为例展示安装和使用流程。在 Claude Code 或 Cursor 上也可以同样安装和使用。
 
 ## 首次设置（只做一次）
 
@@ -16,7 +18,7 @@ English Podcast Speaking Coach 是一个 Codex skill，用于把 ESLPod、Englis
 
 在 Finder 或文件管理器中新建一个目录，例如 `EnglishPod Coach`。后续课文、练习记录和自动生成的学习状态都会放在这个目录里。
 
-### 2. 用 Codex 打开学习目录
+### 2. 打开学习目录
 
 在 Codex 中打开刚才创建的学习目录。首次使用时，目录可以是空的。
 
@@ -35,13 +37,13 @@ English Podcast Speaking Coach 是一个 Codex skill，用于把 ESLPod、Englis
 
 完成首次设置后，每次学习都从同一个学习目录开始。
 
-### 1. 用 Codex 打开学习目录
+### 1. 打开学习目录
 
-打开第一次设置时创建的 `EnglishPod Coach` 目录。
+打开安装了该 skill 的 `EnglishPod Coach` 目录。
 
 ### 2. 拖入课文
 
-把 EnglishPod 文本、ESLPod 文本或其他播客转写稿拖到 Codex 对话框。
+把 EnglishPod 文本、ESLPod 文本或其他播客转写稿拖到 Codex 的对话框。
 
 ### 3. 开始这一课
 
@@ -51,10 +53,10 @@ English Podcast Speaking Coach 是一个 Codex skill，用于把 ESLPod、Englis
 带我学习这一课
 ```
 
-如果课文文件已经放在学习目录里，也可以直接写文件名：
+如果课文文件已经放在学习目录里，也可以直接@该文件：
 
 ```text
-请带我学习 lesson-01.txt 这一课。
+请带我学习 @lesson-01.txt 这一课。
 ```
 
 一次完整练习通常包含：
