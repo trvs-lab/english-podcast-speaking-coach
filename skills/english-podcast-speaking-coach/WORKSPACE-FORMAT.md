@@ -52,8 +52,6 @@ english-coach/
   lessons/
   learning-records/
   archives/
-    phrase-bank/
-    review-queue/
     state-snapshots/
 ```
 
@@ -66,13 +64,15 @@ File responsibilities:
 - `GLOSSARY.md`: canonical terms such as active recall, core target, near-transfer, repair target, extension expression, active phrase bank, and review queue. Do not include pronunciation terms.
 - `state/CURRENT.md`: short startup summary. Rewrite it at lesson end instead of appending forever.
 - `state/phrase-bank-index.md`: derived index of active and stable phrase-bank entries. Rebuild from `phrase-bank/*.md` if missing, stale, or contradictory.
-- `state/review-queue.md`: review items grouped into active, dormant, and retired sections.
-- `state/repair-bank.md`: repeated learner-specific repair patterns grouped into active, dormant, and retired sections.
-- `state/writeback-ledger.md`: compact derived ledger of completed applied lesson writebacks, keyed by `lesson_id`.
-- `phrase-bank/*.md`: source of truth for active, stable, and retired phrase-bank items.
+- `state/review-queue.md`: unmastered or recently repaired expressions that should return in future lessons, grouped into active, dormant, and retired sections.
+- `state/repair-bank.md`: recurring learner-specific error patterns that should shape future prompts and corrections, grouped into active, dormant, and retired sections.
+- `state/writeback-ledger.md`: compact derived ledger of completed applied lesson writebacks, keyed by `lesson_id`; this is agent bookkeeping, not a learning note.
+- `phrase-bank/*.md`: expressions and reusable patterns the learner can actively produce, grouped by topic for scanning and review.
 - `lessons/*.md`: source of truth for completed lesson evidence and intended writebacks.
 - `learning-records/*.md`: decision-grade learning insights only.
-- `archives/`: snapshots and old state that should not stay in startup files.
+- `archives/`: high-risk recovery material only. Ordinary completed lessons should not create archive files.
+
+Do not create empty archive subdirectories other than `archives/state-snapshots/` during normal workspace initialization. Do not create `archives/phrase-bank/` or `archives/review-queue/` for routine retired learning records; keep those records in the active files' dormant or retired sections unless an explicit recovery or migration operation requires a snapshot directory.
 
 ## Default Mission
 

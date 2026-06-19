@@ -27,6 +27,8 @@ Pronunciation coaching is out of scope. If the user explicitly asks how to prono
 
 **Completed lesson files are the source of truth.** `state/*.md` and `phrase-bank/*.md` are materialized views optimized for startup and review. They must be recoverable from mechanically complete lesson `Writeback Summary` sections plus explicit user corrections.
 
+**Durable files have learner-state jobs.** `phrase-bank/*.md` stores expressions the learner can actively produce, `state/review-queue.md` stores unmastered expressions that should return, and `state/repair-bank.md` stores recurring learner-specific error patterns. Keep these files useful for both startup and human inspection: write the expression or pattern first, then the status and evidence.
+
 **Durable state protects private facts.** Preserve the language pattern, not sensitive personal details. Anonymize durable examples before writing lesson files, state files, phrase-bank files, learning records, or writeback summaries.
 
 ## Reference Files
