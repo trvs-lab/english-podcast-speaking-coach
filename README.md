@@ -45,6 +45,8 @@ English Podcast Speaking Coach 是一个面向 AI agent 的本地 skill，可用
 
 把 EnglishPod 文本、ESLPod 文本或其他播客转写稿拖到 Codex 的对话框。
 
+> [这里](https://github.com/guaguaguaxia/english_pod)有人整理的了 EnglishPod 的文档，可以下载使用
+
 ### 3. 开始这一课
 
 发送：
