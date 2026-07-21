@@ -1,8 +1,8 @@
 # English Podcast Speaking Coach
 
-English Podcast Speaking Coach 是一个面向 AI agent 的本地 skill，可用于 Codex、Claude Code、Cursor 等工具。它用于把 ESLPod、EnglishPod、播客转写稿和对话课材料转成主动口语练习，会围绕真实语境组织角色扮演、主动回忆、近迁移修复、复述和自由表达，并把学习状态写入可查看的 Markdown 工作区。
+English Podcast Speaking Coach 是一个面向 AI agent 的本地 skill，可用于 Codex、Claude Code、Cursor 等工具。它把 ESLPod、EnglishPod、播客转写稿和对话课材料转成主动口语练习，围绕真实语境组织主动回忆、角色扮演、迁移练习、延迟提取和跨课复习，并把学习状态写入可查看的 Markdown 工作区。
 
-这个 skill 适合已经有英文听力材料或课程文本、希望把「听懂」推进到「能说出来」的学习流程。它不提供发音训练，重点是表达召回、句块复用、自然改写和跨课复习。
+这个 skill 适合已经有英文听力材料或课程文本、希望把「听懂」推进到「能说出来」的学习流程，重点是表达召回、句块复用、自然改写和跨课复习。
 
 ## 使用方式
 
@@ -63,13 +63,13 @@ English Podcast Speaking Coach 是一个面向 AI agent 的本地 skill，可用
 
 一次完整练习通常包含：
 
-1. 进入真实语境，说明本节课要练的表达方向。
-2. 通过角色扮演触发主动回忆，先让学习者尝试说出英文。
-3. 卡住时逐步给提示，从关键词到句型框架，再到完整表达。
-4. 对 Chinglish、搭配、时态、冠词、信息顺序等问题做针对性修复。
-5. 用近迁移场景重新练习，而不是只照抄答案。
-6. 通过复述、自由表达和 Speed round 检查可主动说出的表达。
-7. 在课末写回学习状态，区分已说出的表达、下次还要练的表达、听过但未练熟的表达和词汇。
+1. 直接进入真实语境，用一道口语题开始课程。
+2. 在原文场景中理解表达，再根据学习目标迁移到新的真实场景。
+3. 每个学习块练习 3–5 个表达，密集课文通常保留约 8–15 个高价值候选。
+4. 卡住时沿同一条援助阶梯从关键词或短句框架推进到完整示范。
+5. 得到帮助的表达经过至少两个其他开口任务后，再做无提示提取。
+6. 在学习块边界区分已经能自己说出的表达、还要再练的表达和剩余内容。
+7. 通过角色对话、真实计划或简短复述整合表达，并在课末写回学习状态。
 
 ## 学习工作区
 
@@ -79,37 +79,29 @@ English Podcast Speaking Coach 是一个面向 AI agent 的本地 skill，可用
 
 ```text
 english-coach/
-  WORKSPACE.md
-  MISSION.md
-  NOTES.md
-  RESOURCES.md
-  GLOSSARY.md
-  state/
-    CURRENT.md
-    phrase-bank-index.md
-    review-queue.md
-    repair-bank.md
-    writeback-ledger.md
-  phrase-bank/
+  PROFILE.md
+  PHRASES.md
+  REVIEW.md
   lessons/
-  learning-records/
-  archives/
 ```
 
 这些文件用于保存长期学习记忆：
 
-- `state/review-queue.md`：仍需复习或刚修复过的表达。
-- `state/repair-bank.md`：反复出现的个人错误模式。
-- `phrase-bank/*.md`：已经能主动说出的表达和可复用句型。
-- `lessons/*.md`：已完成课程的证据和写回记录，是恢复学习状态的主要依据。
-- `RESOURCES.md`：常用课程、播客系列、转写稿目录或学习资料链接。
+- `PROFILE.md`：长期目标、场景偏好、大致能力和常用课文来源。
+- `PHRASES.md`：已经在新情境中独立说出的表达，以及后续课程中的稳定证据。
+- `REVIEW.md`：仍在学习的表达和需要继续修复的语言问题。
+- `lessons/*.md`：每次课程的简短摘要、学习证据和下一步。
 
 ## 练习原则
 
 - 先尝试表达，再显示目标英文。
-- 提示分层给出，避免一开始直接展示答案。
-- 只有无提示的主动产出才会被视为稳定掌握证据。
-- 课末状态以完成的 lesson 文件为准，状态文件可以从 lesson 记录恢复。
+- 回答失败和主动求助共用一条逐级援助路径，辅助成功后的下一次提取会撤除刚才使用的支架。
+- 新情境中的无提示产出支持主动掌握，后续课程中的间隔成功支持稳定掌握。
+- 原文场景负责准确理解，迁移场景负责把表达用于真实目标。
+- 功能相近的已学表达会穿插到同一新场景中，由学习者根据语气和使用条件自主选择。
+- 反复出现的语言问题会进行一次简短根因修复，再回到原口语场景验证。
+- 跨课项目按 `repaired`、`learning`、`active`、`stable` 和最近证据轻量复习，新课最多穿插两个，并计入当前学习块的 3–5 项总量。
+- 课末状态以 lesson 文件为恢复依据。
 - 长期记录会保留语言模式，避免写入不必要的隐私细节。
 
 ## 适用材料
@@ -121,31 +113,17 @@ english-coach/
 - 包含真实生活、工作、旅行、观点表达或讲故事场景的英文材料。
 - 学习者想复述、改写或转成口语表达的英文文本。
 
-不适合作为主要任务：
-
-- 单词发音纠正。
-- 纯语法题讲解。
-- 没有可迁移口语表达的长篇资料整理。
-- 要求逐字背诵完整 transcript 的练习。
-
 ## 仓库结构
 
 ```text
 skills/
   english-podcast-speaking-coach/
     SKILL.md
-    INTERACTION-RULES.md
-    WORKSPACE-FORMAT.md
-    STATE-SCHEMAS.md
-    WRITEBACK-FORMAT.md
-    RECOVERY-RULES.md
-    REGRESSION-SCENARIOS.md
+    references/
+      persistence.md
+      evaluation.md
 ```
 
-- `SKILL.md` 是运行入口，定义触发条件、核心原则和引用文件读取规则。
-- `INTERACTION-RULES.md` 定义实时教学、角色扮演、目标隐藏和反馈方式。
-- `WORKSPACE-FORMAT.md` 定义 `english-coach/` 工作区结构。
-- `STATE-SCHEMAS.md` 定义复习队列、短语库和修复库的状态格式。
-- `WRITEBACK-FORMAT.md` 定义课末写回和学习记录格式。
-- `RECOVERY-RULES.md` 定义状态恢复、冲突处理和隐私保护规则。
-- `REGRESSION-SCENARIOS.md` 记录行为回归检查场景。
+- `SKILL.md`：运行入口，定义目标判断、教学循环、难度调整和课堂收束。
+- `references/persistence.md`：学习工作区、状态流转、写回和恢复规则。
+- `references/evaluation.md`：维护时使用的课堂轨迹和回归场景。
