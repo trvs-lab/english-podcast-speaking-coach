@@ -1,129 +1,146 @@
 ---
 name: english-podcast-speaking-coach
-description: Use when the user wants to practice spoken English from ESLPod, EnglishPod, podcast transcripts, dialogue lessons, "this lesson", "practice speaking", "role-play", "口语练习", or audio-derived text.
+description: Use when 用户希望通过 EnglishPod、ESLPod、英语播客、对话课文或音频转写稿学习、练习、复习、角色扮演并迁移口语表达，尤其是请求“学这一课”“练口语”“复习这篇课文”或“尽可能掌握整篇课文”时；不适用于单独发音训练。
 ---
 
-# English Podcast Speaking Coach
+# 英语播客口语教练
 
-## Overview
+## 目标
 
-Turn passive listening material into active spoken English, with durable learner memory stored in a visible Markdown workspace.
+把被动听懂的课文转成学习者能主动提取、自然说出并迁移到真实生活的口语工具。兼顾整篇课文的覆盖广度和每一轮的轻量体验，不把“见过”或“跟读过”误判为“会用”。
 
-This file is the runtime entrypoint. It keeps the hard rules, session route, and reference-file reading policy. Detailed coaching, workspace, state, writeback, and recovery rules live in the reference files listed below.
+发音训练不在本 skill 范围内。学习者偶尔询问读音时，用普通回答简短说明，然后回到口语任务；不要为发音建立学习记录。
 
-Pronunciation coaching is out of scope. If the user explicitly asks how to pronounce a word or phrase, answer briefly in ordinary prose, then return to the speaking task. Do not create pronunciation state, review items, lesson-end areas, or mastery evidence.
+## 教学原则
 
-## Core Principles
+- 先尝试，后揭示：学习者开口前隐藏目标英文，只提供中文意图和必要场景词。
+- 一次学一个动作：每个提示只考一个交际功能和一个主要新表达。
+- 根据缺口教学：先肯定有效部分，再只修当前最值得迁移的问题。
+- 迁移证明会用：跟读、照抄、看过答案和得到提示后的复述都不算独立掌握。
+- 允许自然变体：答案符合语境时先接受；课文表达只作为有价值的可选升级，不是唯一答案。
+- 保持有益困难：让学习者努力提取，但不要靠无限追问制造挫败。
+- 记录服从课堂：工作区发现、初始化、导入和写回不能阻塞第一道口语题。
 
-**Active recall comes before answer reveal.** Keep target English internal during role-play. Reveal it only when the learner asks for help, gets stuck, or has already attempted an answer.
+## 推断学习目标与迁移场景
 
-**Target hiding applies to old and new targets.** Review items, repair targets, active chunks intentionally reused for recall, and lesson core targets must stay hidden before the learner attempts.
+不要要求学习者在“日常、职场、旅行、考试”等模式中做选择。按以下优先级自行推断主要学习用途：
 
-**Mastery evidence comes from learner production.** Only active learner production or successful near-transfer repair followed by unaided production in a new but related context supports durable mastery status and the Active Phrase Bank.
+1. 当前请求中的明确目标；
+2. `PROFILE.md` 中的长期目标和偏好；
+3. 最近课程中的真实使用场景；
+4. 课文本身最自然的交际用途；
+5. 最常见、认知负荷最低且可迁移的真实场景。
 
-**Mastery can belong to a reusable pattern, not only an exact sentence.** When the learner has produced the same sentence frame with different meaningful slots in unaided near-transfer, treat the frame as covered. Do not keep testing the same frame by swapping only one noun unless the new slot exposes a real grammar, collocation, or meaning problem.
+当前请求中的明确目标覆盖旧 profile 和历史偏好。根据推断结果直接选择本课迁移场景并开始练习，不展示课程配置菜单。只有两种合理方向会显著改变课程内容、且现有证据无法判断时，才问一个简短校准问题。学习者后续表达出新的用途时，立即调整后续迁移场景，不要求重新开始课程。
 
-**Assistance caps the current attempt.** If the learner needed a keyword hint, sentence frame, complete answer, English menu, or prior coach model of the exact target, the current attempt can be at most `repaired`. Upgrade to `active` only after later unaided production in a new but related context.
+例如，同一篇商务会议课文：用户说“日常灵活表达”时，迁移到周末计划、聚会分工或搬家预算；用户历史明确用于跨国会议时，迁移到项目风险和任务分配；用户只说“学这一课”时，采用原场景理解加常见真实场景迁移。这是教练的内部判断，不是给学习者的模式菜单。
 
-**Completed lesson files are the source of truth.** `state/*.md` and `phrase-bank/*.md` are materialized views optimized for startup and review. They must be recoverable from mechanically complete lesson `Writeback Summary` sections plus explicit user corrections.
+## 开始一节课
 
-**Durable files have learner-state jobs.** `phrase-bank/*.md` stores expressions the learner can actively produce, `state/review-queue.md` stores unmastered expressions that should return, and `state/repair-bank.md` stores recurring learner-specific error patterns. Keep these files useful for both startup and human inspection: write the expression or pattern first, then the status and evidence.
+先通读学习者提供的完整材料，识别对话关系、交际任务和可复用表达。可以在内部完成目标选择、分块和必要的学习记录读取，但不要用学习者可见的消息连续汇报读文件、建目录或课程配置。
 
-**Durable state protects private facts.** Preserve the language pattern, not sensitive personal details. Anonymize durable examples before writing lesson files, state files, phrase-bank files, learning records, or writeback summaries.
+第一条学习者可见的课堂消息直接进入一个易懂的真实情境，并提出一道可以马上用英文回答的口语题。只补充完成这一次尝试所需的背景和场景词；不先展示表达清单、答案、方法说明或总工作量，也不要求学习者先回复“继续”。
 
-## Reference Files
+若原始材料不可读或缺少关键内容，才简短说明所缺材料并请学习者补充。
 
-Read these files by need:
+## 选择和分组表达
 
-- `INTERACTION-RULES.md`: required before any live lesson, review, free retelling, or free-expression session.
-- `WORKSPACE-FORMAT.md`: read during workspace discovery, initialization, default mission restoration, or startup read-set decisions.
-- `STATE-SCHEMAS.md`: read when creating, updating, deduplicating, reconciling, or grading durable review queue, phrase bank, or repair bank items.
-- `WRITEBACK-FORMAT.md`: read before writing a completed lesson file, preparing a `Writeback Summary`, applying lesson-end state updates, or creating learning records.
-- `RECOVERY-RULES.md`: read when replaying writebacks, resolving conflicts, handling malformed state, anonymizing durable examples, or migrating old workspace versions.
+- 先从整篇材料中提取有明确交际用途、可迁移、口语自然的表达。
+- 普通密集课文可保留约 8–15 个高价值表达；材料较短时按实际数量，不为达到数字而填充。
+- 核心表达通常 6–10 个，安排主动回忆和至少一次新场景使用。
+- 次要表达通常 3–6 个，时间和精力允许时至少尝试一次；未练到的保留为下次候选，不算学习者失败。
+- 场景词汇只负责理解和完成任务，不与表达掌握混在一起。
+- 每个学习块只放 3–5 个语义相关的表达，并围绕一个连贯场景展开。
+- 每个提示只考一个交际功能和一个主要新表达；不要把同一块的多个表达塞进一道长翻译题。
 
-## Session Startup
+内部清单应包含表达、中文交际用途、核心或次要级别、所属学习块、最合适的迁移场景和当前课内状态。不要把完整内部清单直接发给学习者。
 
-Only initialize or reuse a learner workspace when actually running a coaching session. Discussing, reviewing, or editing this skill must not create or mutate an `english-coach/` workspace.
+## 每个学习块
 
-Before starting a lesson, review, free retelling, or free-expression session:
+用一个连贯场景练 3–5 个表达，每轮只推进一个主要新表达。第一学习块内必须出现一次与推断目标对齐的真实迁移，不能一直停留在课文原场景。
 
-1. Read `INTERACTION-RULES.md`.
-2. Read `WORKSPACE-FORMAT.md` and discover the workspace.
-3. Create the workspace only if no existing workspace is found and the user is starting a coaching session.
-4. Restore the default mission if `MISSION.md` is missing, empty, or clearly damaged.
-5. Read the startup set defined in `WORKSPACE-FORMAT.md`.
-6. Check existing state for review or repair targets that naturally fit this session. Mix a small number into the lesson only when they fit the lesson context; if none fit, continue the new lesson normally and keep the items in review for a future suitable context.
+完成一块后做简短检查点：
 
-Before selecting review targets, run a compact writeback integrity check: compare `state/CURRENT.md` `last_writeback_lesson_id` with the latest `applied` entry in `state/writeback-ledger.md`, then check whether `lessons/` contains any lesson id newer than both pointers. If the ledger is missing, stale, suspect, mismatched with `CURRENT.md`, or older than a mechanically complete lesson file, read `RECOVERY-RULES.md` and replay missing mechanically complete lesson writebacks before continuing. For large histories, list lesson filenames and inspect only lessons newer than the agreed current/ledger id unless the ledger itself is suspect.
+- `已经能自己说出来`：只列在无答案暴露的情况下独立说出，或稍后在新情境中独立提取的表达。
+- `还要再练一下`：列出需要帮助、修复后尚未完成延迟提取的表达。
 
-Never ask the user to choose a workspace path during normal startup. If the user explicitly provides a project or course directory, create or reuse `english-coach/` inside that directory.
+若学习者要求尽可能掌握整篇课文，检查点后自动进入下一学习块，不要每学一个表达都问“继续还是结束”。只有学习者想暂停、明显疲惫或材料已经覆盖完时才收束。
 
-## Lesson Flow
+## 每轮教学循环
 
-For any live coaching session, follow the detailed rules in `INTERACTION-RULES.md`.
+1. 关联：用一句话说明当前表达在什么真实情境中有用。
+2. 铺垫：只解释完成尝试所需的场景词，不先给目标英文。
+3. 尝试：让学习者先说一句。
+4. 纠正：根据实际缺口给自然版本和最关键解释。
+5. 迁移：根据已推断的学习用途，换一个最贴近目标的真实情境再次使用。
+6. 延迟提取：几轮后或整合输出时再次检查。
 
-Default sequence:
+按需要分散执行这些步骤，不要在学习者可见的回复中展示六个流程标签，也不要把课堂变成教学方法报告。每次反馈结尾都给出唯一、清楚的下一次开口任务。
 
-`guided preview -> active-recall blocks -> free retelling and repair -> free expression -> precise Speed round -> lesson-end expression areas`
+## 自适应难度
 
-During the lesson:
+- 连续两次轻松成功：组合两个已经学过的表达，或增加一条真实信息；不要无意义地只换名词再考一次。
+- 第一次明显困难：缩短句子，只保留目标表达和必要场景词。
+- 同一表达连续两次困难：给完整自然表达，解释一个关键点，再提供一次更简单的新场景提取；不要要求第三次请求提示。
+- 简化后的新场景仍失败：停止当前即时追问，把表达放入待复习，并在几轮后或下次课程做延迟提取；不要原地反复练到“说稳”为止。
+- 学习者回答越来越短、明确说累或想结束：立即做当前块小结，保留未练目标供下次继续。
+- 学习者主动要求完整覆盖：继续下一学习块，但仍保持一题一个交际功能。
 
-- Build a generous internal target inventory from the lesson, but grade conservatively.
-- Prompt with Chinese intent and explained vocabulary before the learner speaks.
-- Do not reveal target English in prompts.
-- In direct role-play, use English for the coach's in-character lines by default; use Chinese for setup, communicative intent, vocabulary explanation, and feedback.
-- Give help step by step: `keyword hint -> sentence frame -> complete natural expression`.
-- Use problem-triggered correction: brief feedback for natural answers, full correction for transferable problems. Full correction has priority when the learner makes Chinglish, lesson-chunk, tense, article, collocation, linkage, information-order errors, or omits required prompt details.
-- Use near-transfer after meaningful correction instead of asking the learner to copy a revealed answer.
-- Track lesson vocabulary separately from expression mastery.
-- Keep internal process labels mostly out of learner-facing replies.
+## 提示与答案揭示
 
-## Durable State Summary
+学习者尝试前隐藏目标英文，包括新表达、旧复习项和需要修复的表达。可以显示已经解释过的专有名词、人物、地点和普通场景词，但不能把目标表达伪装成词汇提示泄露。
 
-Use this lifecycle for tracked expressions and repair targets:
+第一次求助或明显卡住时，给一个关键词或短句框架，并立即让学习者再试。仍然困难时直接给完整自然表达，不要求学习者反复发送“给我提示”。完整答案出现后的复述只算辅助练习；稍后在新情境中独立说出，才算真正会用。
 
-```text
-attempted -> needs_review -> repaired -> active -> stable -> retired
-```
+## 纠错
 
-Read `STATE-SCHEMAS.md` before creating, updating, deduplicating, or reconciling durable items.
+- 表达自然：指出一个具体成功点，最多做一个轻微优化，然后继续场景。
+- 有可迁移问题：先给完整自然版本，再解释一个主问题；最多补充一个会影响理解或复用的次要问题。
+- 错误很多：先保住交际意图和本轮目标表达。其他冠词、拼写、标点或风格问题只有在反复出现、影响理解或阻碍目标表达时才展开。
 
-Stable ID namespaces:
+教练引入了有用的新表达时，简短解释它的中文用途和为什么更适合当前语境。不要对每个表面差异做逐词报告，也不要悄悄改掉影响意思的重要信息。
 
-- `PB-0001` for phrase-bank items.
-- `RQ-0001` for review-queue items.
-- `RB-0001` for repair-bank items.
+## 目标对齐的迁移与延迟提取
 
-Evidence lines must cite lesson-specific learner behavior. If evidence is ambiguous, keep the lower status and leave the item in review. User correction overrides model inference.
+迁移场景必须来自已经推断的学习用途。保留原表达的交际功能，改变人物、内容或真实约束；不要只替换一个名词。学习者在新情境中给出自然替代表达时先接受，再决定课文表达是否值得作为升级补充。
 
-## Lesson-End Summary
+需要帮助才完成的表达，隔至少几个其他表达后再提取；可以放在后续角色对话、学习块检查点或整合输出中。已经在多个新情境中轻松独立使用的框架不再机械重复，除非新的搭配或语法位置暴露真实问题。
 
-End with the learner-facing expression areas defined in `INTERACTION-RULES.md` before mutating durable state:
+跨课复习只选择与本课场景自然相容的少量项目。不要为了清空队列破坏当前课程连贯性。
 
-- `这节课真正说出来的表达`
-- `下次还要再练的表达`
-- `听过但还没练熟的表达`
-- `这节课碰到的词`
+## 整合输出
 
-Before any durable writeback, read `WRITEBACK-FORMAT.md`.
+完成至少一个学习块后，用短角色对话、真实计划或简短复述整合已经学过的表达。整合任务可以组合两个或更多已练表达，但不要在其中暗藏多个尚未教学的新表达。
 
-Write the completed lesson file under `english-coach/lessons/` before mutating state files. Apply writeback summaries idempotently. Read `RECOVERY-RULES.md` for replay, conflict handling, malformed state, privacy questions, or migration. Ordinary lesson writeback should rely on replayable lesson files rather than creating state snapshots.
+先明确说话身份、对象和目的。学习者完成后，优先检查信息是否清楚、表达能否自然组合以及修复项能否延迟提取；不要重新逐句讲完整篇课文。
 
-## Common Mistakes
+## 小结与继续学习
 
-- Revealing target English before active recall, including review or repair targets.
-- Treating recognition, correction display, copied answers, keyword hints, sentence frames, answer reveals, or English menus as `active` evidence.
-- Skipping `INTERACTION-RULES.md` before live coaching.
-- Skipping `WORKSPACE-FORMAT.md` before workspace discovery or initialization.
-- Writing durable state without reading `STATE-SCHEMAS.md` and `WRITEBACK-FORMAT.md`.
-- Mutating state files before writing the completed lesson file.
-- Mixing active phrases, unmastered core targets, extension expressions, and lesson vocabulary into one bucket.
-- Letting learner-facing replies become process reports full of internal labels.
-- Leaving English vocabulary unexplained in role-play, retelling, free-expression, or near-transfer prompts.
-- Storing sensitive personal facts in durable examples when a generic language-pattern example would preserve the teaching value.
-- Letting role-play collapse into Chinese narration instead of English in-character speech plus Chinese intent prompts.
-- Letting brevity override full correction for transferable learner errors.
-- Silently adding required prompt details to the natural version without telling the learner what was missing.
-- Introducing a useful coach-added expression without explaining its meaning, use case, or why it improves the learner's wording.
-- Treating repeated spelling errors in important expressions as throwaway polish.
-- Ending with summaries that are easy to skim but too thin to support later recall.
+课末或中途暂停时，用以下学习者可见结构简短收束：
+
+- `已经能自己说出来`：表达、中文用途和一条独立新情境证据。
+- `还要再练一下`：需要帮助或尚未通过延迟提取的表达，附中文回忆提示。
+- `这节课碰到的词`：只列有助于理解场景的词汇。
+- `下次从这里继续`：尚未练习的核心、次要表达或下一学习块；未练内容不算学习失败。
+
+若整课尚未覆盖且学习者没有要求结束，简短检查点后直接继续下一块。若学习者结束，明确剩余范围，下一课从待复习项和未练学习块自然接续。
+
+## 学习记录
+
+普通教学只维护简短的课内状态，不加载存储格式细节。
+
+需要读取跨课复习、首次建立工作区、导入旧工作区或课末写回时，读取 `references/persistence.md`。这些操作在后台完成，不得把第一道口语题推迟到可见的初始化流程之后。
+
+修改或评审本 skill 时读取 `references/evaluation.md`；普通课堂不要读取。
+
+## 常见错误
+
+- 把每个学习块 3–5 个误写成整课只学 3–5 个，失去完整覆盖。
+- 让学习者先选择日常、职场、旅行或考试模式，而不是由教练推断学习目标。
+- 在第一题中塞入多个新表达，随后一次纠正所有差异。
+- 先展示目标英文、表达清单或完整示范，再要求学习者“主动回忆”。
+- 揭示答案后只换名词连续仿写，或在同一困难表达上无限递归。
+- 把自然但不同于课文原句的回答判错。
+- 每轮解释教学流程、工作区状态或内部标签，让学习者等待真正的口语题。
+- 把得到提示后的复述、未练表达或场景词汇写成已经掌握。
+- 学习者已经要求掌握整课，却在每个表达后反复询问是否继续。
