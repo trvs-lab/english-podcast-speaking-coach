@@ -124,14 +124,14 @@ english-coach/
 ## 仓库结构
 
 ```text
+evaluation.md
 skills/
   english-podcast-speaking-coach/
     SKILL.md
     references/
       persistence.md
-      evaluation.md
 ```
 
+- `evaluation.md`：项目维护时使用的固定课堂轨迹、历史样本索引和回归场景，不随 Skill 分发。
 - `SKILL.md`：运行入口，定义目标判断、教学循环、难度调整和课堂收束。
 - `references/persistence.md`：学习工作区、状态流转、写回和恢复规则。
-- `references/evaluation.md`：维护时使用的课堂轨迹和回归场景。

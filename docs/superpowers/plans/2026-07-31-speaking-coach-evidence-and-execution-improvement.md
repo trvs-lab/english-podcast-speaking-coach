@@ -129,7 +129,7 @@
 保持三个现有运行职责，不新增新的常驻状态文件：
 
 - `SKILL.md`：只保留热路径教学合同、内部课程清单、证据规则和课堂收束；
-- `references/evaluation.md`：保存固定回归场景、失败样本索引和验收矩阵；
+- 项目根目录 `evaluation.md`：保存固定回归场景、失败样本索引和验收矩阵，不随 Skill 分发；
 - `references/persistence.md`：保存跨课状态、写回格式和恢复规则。
 
 历史问题的长篇叙述保留在 `docs/superpowers/specs/` 和 `history/`，不继续复制到运行入口。

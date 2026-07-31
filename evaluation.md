@@ -1,6 +1,6 @@
-# 维护评估
+# English Podcast Speaking Coach 项目评估
 
-修改或评审本 Skill 时读取本文件。普通教学不读取。
+本文件属于项目级回归评测资产，不随 Skill 分发。修改或评审 Skill 时读取；普通教学不读取。
 
 ## 评估方法
 
