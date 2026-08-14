@@ -1,5 +1,7 @@
 # English Podcast Speaking Coach
 
+![English Podcast Speaking Coach：陪你从不会说，练到真正说得出口](docs/images/english-podcast-speaking-coach-cover.png)
+
 English Podcast Speaking Coach 是一个面向 AI agent 的本地 skill，可用于 Codex、Claude Code、Cursor 等工具。它把 ESLPod、EnglishPod、播客转写稿和对话课材料转成主动口语练习，围绕真实语境组织主动回忆、角色扮演、迁移练习、延迟提取和跨课复习，并把学习状态写入可查看的 Markdown 工作区。
 
 这个 skill 适合已经有英文听力材料或课程文本、希望把「听懂」推进到「能说出来」的学习流程，重点是表达召回、句块复用、自然改写和跨课复习。
